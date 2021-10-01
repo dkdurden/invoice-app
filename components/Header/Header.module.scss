@@ -1,0 +1,61 @@
+@use "../../styles/variables" as v;
+
+.header {
+  max-height: 72px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: v.$bg-dark-1;
+}
+
+.shape {
+  background-color: v.$purple-dark;
+  width: 72px;
+  height: 72px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: relative;
+  display: grid;
+  place-content: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 72px;
+    height: 36px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    top: 50%;
+    background-color: v.$purple-light;
+    z-index: 1;
+  }
+}
+
+.logo {
+  z-index: 2;
+}
+
+.group {
+  //   width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  background: none;
+  border: none;
+  border-right: 1px solid #494e6e;
+  padding-right: 24px;
+  align-self: stretch;
+}
+
+.avatar {
+  margin: 20px 24px;
+
+  img {
+    border-radius: 50%;
+  }
+}
