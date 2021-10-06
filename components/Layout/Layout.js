@@ -7,13 +7,15 @@ import styles from "./Layout.module.scss";
 
 export function Layout({ children }) {
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Nextjs Invoice App</title>
       </Head>
-      <Header />
-      <main>{children}</main>
+      <header className={styles.header}>
+        <Header />
+      </header>
+      <main className={styles.main}>{children}</main>
     </div>
   );
 }

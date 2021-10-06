@@ -1,15 +1,5 @@
 @use "../../styles/variables" as v;
 
-.header {
-  max-height: 72px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: v.$bg-dark-1;
-}
-
 .shape {
   background-color: v.$purple-dark;
   width: 72px;
@@ -31,6 +21,16 @@
     top: 50%;
     background-color: v.$purple-light;
     z-index: 1;
+
+    @media (min-width: v.$md) {
+      width: 100px;
+      height: 50px;
+    }
+  }
+
+  @media (min-width: v.$md) {
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -39,9 +39,14 @@
 }
 
 .group {
-  //   width: 200px;
   display: flex;
   align-items: center;
+
+  @media (min-width: v.$md) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
 }
 
 .toggle {
@@ -50,11 +55,20 @@
   border-right: 1px solid #494e6e;
   padding-right: 24px;
   align-self: stretch;
+
+  @media (min-width: v.$md) {
+    padding-right: 0;
+    padding-bottom: 24px;
+    border-right: none;
+    border-bottom: 1px solid #494e6e;
+    justify-content: stretch;
+  }
 }
 
 .avatar {
   margin: 20px 24px;
-
+  display: grid;
+  place-content: center;
   img {
     border-radius: 50%;
   }

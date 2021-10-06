@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 
 export function Header({ children }) {
   return (
-    <header className={styles.header}>
+    <>
       <div className={styles.shape}>
         <Image
           src="/logo.svg"
@@ -32,6 +32,6 @@ export function Header({ children }) {
           />
         </span>
       </div>
-    </header>
+    </>
   );
 }

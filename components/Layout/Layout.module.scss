@@ -1,0 +1,32 @@
+@use "../../styles/variables" as v;
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: v.$md) {
+    flex-direction: row;
+  }
+}
+
+.header {
+  max-height: 72px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: v.$lm-bg-dark-1;
+
+  @media (min-width: v.$md) {
+    max-width: 100px;
+    min-height: 100vh;
+    flex-direction: column;
+    flex-basis: 100%;
+  }
+}
+
+.main {
+  overflow-y: auto;
+  flex-basis: 100%;
+}

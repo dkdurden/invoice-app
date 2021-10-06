@@ -1,0 +1,54 @@
+@use "./variables" as v;
+
+.button {
+  border-radius: 24px;
+  color: black;
+  font-size: 0.75rem;
+  padding: 1.4em 2em;
+  color: white;
+
+  &--primary {
+    @extend .button;
+    background-color: v.$purple-dark;
+
+    &:hover {
+      background-color: v.$purple-light;
+    }
+  }
+
+  &--light {
+    @extend .button;
+    background-color: v.$button-light-bg;
+    color: v.$button-light-color;
+
+    &:hover {
+      background-color: v.$gray-light;
+    }
+  }
+
+  &--dark {
+    @extend .button;
+    background-color: v.$lm-bg-dark-1;
+    color: v.$gray-dark;
+
+    &:hover {
+      background-color: v.$lm-bg-dark-2;
+    }
+  }
+
+  &--danger {
+    @extend .button;
+    background-color: v.$danger;
+
+    &:hover {
+      background-color: v.$danger-light;
+    }
+  }
+
+  &--wide {
+    @extend .button--light;
+
+    padding-left: 9.6em;
+    padding-right: 9.6em;
+  }
+}
