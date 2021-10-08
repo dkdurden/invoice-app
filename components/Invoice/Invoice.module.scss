@@ -1,0 +1,41 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.invoice {
+  background-color: white;
+  max-height: 134px;
+  min-height: none;
+}
+
+.container {
+  padding: 1.5rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: stretch;
+  max-height: inherit;
+}
+
+.status {
+  padding: 0.75rem 1.9rem;
+}
+
+.pending {
+  color: v.$orange;
+  background-color: rgba(v.$orange, 50%);
+
+  .circle {
+    @include m.circle(8px, v.$orange);
+  }
+}
+
+.paid {
+  color: v.$green;
+  background-color: rgba(v.$green, 10%);
+
+  .circle {
+    @include m.circle(8px, v.$green);
+  }
+}
+
+.draft {
+}

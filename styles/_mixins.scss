@@ -1,1 +1,6 @@
-
+@mixin circle($width, $color: inherit) {
+  width: $width;
+  height: $width;
+  background-color: $color;
+  border-radius: 50%;
+}
