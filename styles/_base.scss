@@ -9,8 +9,15 @@ body {
   padding: 0;
   margin: 0;
   font-family: v.$font-family;
-  overflow: hidden;
   background-color: v.$lm-main-bg;
+
+  @media (min-width: v.$md) {
+    overflow: hidden;
+  }
+}
+
+main {
+  overflow-y: auto;
 }
 
 a {

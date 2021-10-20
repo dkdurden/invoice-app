@@ -4,7 +4,9 @@
 .invoice {
   background-color: white;
   max-height: 134px;
-  min-height: none;
+  min-height: unset;
+  margin-bottom: 1rem;
+  border-radius: 8px;
 }
 
 .container {
@@ -12,30 +14,112 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: stretch;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // grid-template-rows: auto auto auto;
+  // grid-template-areas:
+  //   "id name"
+  //   "date status"
+  //   "total status";
   max-height: inherit;
+  height: 134px;
+
+  @media (min-width: v.$md) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+}
+
+.id {
+  margin-top: 0;
+  margin-bottom: 1.3rem;
+  order: 0;
+  // grid-area: id;
+
+  @media (min-width: v.$md) {
+    margin-bottom: 0;
+  }
+}
+
+.date {
+  margin-bottom: 0.5rem;
+  order: 0;
+  // grid-area: date;
+
+  @media (min-width: v.$md) {
+    margin-bottom: 0;
+  }
+}
+
+.total {
+  // grid-area: total;
+
+  @media (min-width: v.$md) {
+    order: 2;
+  }
+}
+
+.name {
+  // grid-area: name;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: v.$md) {
+    order: 1;
+    margin-bottom: 0;
+  }
 }
 
 .status {
-  padding: 0.75rem 1.9rem;
+  // grid-area: status;
+  text-transform: capitalize;
+
+  > span {
+    padding: 0.75rem 1.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 104px;
+    border-radius: 6px;
+  }
+
+  @media (min-width: v.$md) {
+    order: 2;
+  }
 }
 
 .pending {
   color: v.$orange;
-  background-color: rgba(v.$orange, 50%);
-
-  .circle {
-    @include m.circle(8px, v.$orange);
-  }
+  background-color: rgba(v.$orange, 7.5%);
 }
 
 .paid {
   color: v.$green;
-  background-color: rgba(v.$green, 10%);
-
-  .circle {
-    @include m.circle(8px, v.$green);
-  }
+  background-color: rgba(v.$green, 7.5%);
 }
 
 .draft {
+  color: v.$lm-bg-dark-1;
+  background-color: rgba(v.$lm-bg-dark-1, 7.5%);
+}
+
+.circle {
+  @include m.circle(8px);
+
+  display: inline-block;
+  margin-right: 0.5rem;
+
+  .paid & {
+    background-color: v.$green;
+  }
+
+  .pending & {
+    background-color: v.$orange;
+  }
+
+  .draft & {
+    background-color: v.$lm-bg-dark-1;
+  }
 }

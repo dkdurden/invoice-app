@@ -5,6 +5,7 @@ import { InvoicesHeader } from "../components/InvoicesHeader/InvoicesHeader";
 import { Invoice } from "../components/Invoice/Invoice";
 import { EmptyInvoices } from "../components/EmptyInvoices/EmptyInvoices";
 import { getAllInvoices } from "../library/invoices";
+import { Invoices } from "../components/Invoices/Invoices";
 
 export async function getStaticProps() {
   const invoices = getAllInvoices();
@@ -23,7 +24,7 @@ export default function Home({ invoices }) {
         <InvoicesHeader />
 
         <div className="content">
-          {showInvoices ? <Invoice invoice={invoices[0]} /> : <EmptyInvoices />}
+          {showInvoices ? <Invoices invoices={invoices} /> : <EmptyInvoices />}
         </div>
       </div>
     </Layout>

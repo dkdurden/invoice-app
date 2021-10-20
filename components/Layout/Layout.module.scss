@@ -12,13 +12,16 @@
 .header {
   max-height: 72px;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: v.$lm-bg-dark-1;
 
   @media (min-width: v.$md) {
+    position: relative;
     max-width: 100px;
     min-height: 100vh;
     flex-direction: column;
@@ -27,6 +30,14 @@
 }
 
 .main {
-  overflow-y: auto;
+  margin-top: 72px;
+  position: relative;
+  z-index: 1;
   flex-basis: 100%;
+
+  @media (min-width: v.$md) {
+    margin-top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
 }

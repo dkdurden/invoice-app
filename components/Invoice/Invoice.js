@@ -15,17 +15,22 @@ export function Invoice({ invoice }) {
             <span className="text-gray-dark">#</span>
             {invoice.id}
           </h2>
+
           <span
             className={`${styles.date} text text-gray-dark`}
           >{`Due ${date}`}</span>
           <span className={`${styles.total} h3`}>&#163; {total}</span>
-          <span className={`${styles.name} text text-gray-dark`}>
-            {invoice.clientName}
-          </span>
-          <span className={`${styles.status} ${styles[invoice.status]}`}>
-            <span className={styles.circle}></span>
-            <span>{invoice.status}</span>
-          </span>
+
+          <div className={`${styles.name} align-end`}>
+            <span className="text text-gray-dark">{invoice.clientName}</span>
+          </div>
+
+          <div className={`${styles.status} align-end`}>
+            <span className={`${styles[invoice.status]}`}>
+              <span className={styles.circle}></span>
+              <span className="text text-bold">{invoice.status}</span>
+            </span>
+          </div>
         </a>
       </Link>
     </article>

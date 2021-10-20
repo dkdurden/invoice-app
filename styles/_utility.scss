@@ -2,6 +2,8 @@
 
 .container {
   padding: 2rem 1.5rem;
+  max-width: 730px;
+  margin: 0 auto;
 }
 
 .text-gray-dark {
@@ -10,4 +12,13 @@
 
 .bg-light {
   background-color: white;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.align-end {
+  display: flex;
+  justify-content: flex-end;
 }
