@@ -6,6 +6,11 @@
   margin: 0 auto;
 }
 
+.card {
+  background-color: white;
+  border-radius: 8px;
+}
+
 .text-gray-dark {
   color: v.$gray-dark;
 }
@@ -18,7 +23,25 @@
   font-weight: 700;
 }
 
+// Flex
+
 .align-end {
   display: flex;
   justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Spacing
+
+.pb-1 {
+  padding-bottom: 0.5rem;
+}
+
+.mx-1 {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }

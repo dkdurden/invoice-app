@@ -1,0 +1,52 @@
+@use "../../styles/variables" as v;
+
+.container {
+  background-color: v.$button-light-bg;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  > * {
+    padding: 1.5rem;
+
+    @media (min-width: 768px) {
+      padding: 2rem 2rem 0.5rem 2rem;
+    }
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.table {
+  width: 100%;
+
+  th,
+  td {
+    padding-bottom: 1.5rem;
+    text-align: end;
+
+    &:first-of-type {
+      text-align: left;
+    }
+
+    &:nth-of-type(2) {
+      text-align: center;
+    }
+  }
+
+  th {
+    font-weight: 500;
+  }
+}

@@ -3,3 +3,15 @@
   height: $width;
   border-radius: 50%;
 }
+
+@mixin fixedHeader($color) {
+  max-height: 72px;
+  overflow: hidden;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $color;
+}

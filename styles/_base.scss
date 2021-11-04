@@ -68,6 +68,13 @@ h3,
   letter-spacing: -0.8px;
 }
 
+.h3.alt {
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  letter-spacing: -0.31px;
+  font-weight: 700;
+}
+
 h4,
 .h4,
 p,
@@ -82,7 +89,8 @@ p.alt {
   font-weight: 500;
 }
 
-p.alt {
+p.alt,
+th.alt {
   font-size: 0.6875rem;
   line-height: 1.64;
   letter-spacing: -0.23px;
