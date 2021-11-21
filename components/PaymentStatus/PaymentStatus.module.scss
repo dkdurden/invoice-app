@@ -1,0 +1,49 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.status {
+  text-transform: capitalize;
+
+  > span {
+    padding: 0.75rem 1.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 104px;
+    border-radius: 6px;
+  }
+}
+
+.pending {
+  color: v.$orange;
+  background-color: rgba(v.$orange, 7.5%);
+}
+
+.paid {
+  color: v.$green;
+  background-color: rgba(v.$green, 7.5%);
+}
+
+.draft {
+  color: v.$lm-bg-dark-1;
+  background-color: rgba(v.$lm-bg-dark-1, 7.5%);
+}
+
+.circle {
+  @include m.circle(8px);
+
+  display: inline-block;
+  margin-right: 0.5rem;
+
+  .paid & {
+    background-color: v.$green;
+  }
+
+  .pending & {
+    background-color: v.$orange;
+  }
+
+  .draft & {
+    background-color: v.$lm-bg-dark-1;
+  }
+}

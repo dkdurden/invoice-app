@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding: 1.25rem 2rem;
+}
+
+.groupOne {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    flex-basis: 30%;
+    justify-content: flex-start;
+  }
+}
+
+.groupTwo {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-basis: 70%;
+    justify-content: flex-end;
+    // gap: 0.5rem;
+  }
+}

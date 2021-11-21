@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ButtonWithAdd } from "../ButtonWithAdd/ButtonWithAdd";
 import styles from "./InvoicesHeader.module.scss";
 
 export function InvoicesHeader() {
@@ -17,12 +18,12 @@ export function InvoicesHeader() {
             <Image
               src="/icon-arrow-down.svg"
               alt=""
-              width={"8.5"}
-              height={"4.5"}
+              width={"12.69"}
+              height={"7.5"}
             />
           </span>
         </button>
-        <button className="button--primary">New</button>
+        <ButtonWithAdd text="New" />
       </div>
     </div>
   );

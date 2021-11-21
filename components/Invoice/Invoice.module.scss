@@ -1,0 +1,85 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.invoice {
+  max-height: 134px;
+  min-height: unset;
+  margin-bottom: 1rem;
+}
+
+.container {
+  padding: 1.5rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: stretch;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // grid-template-rows: auto auto auto;
+  // grid-template-areas:
+  //   "id name"
+  //   "date status"
+  //   "total status";
+  max-height: inherit;
+  height: 134px;
+
+  @media (min-width: v.$md) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+}
+
+.id {
+  margin-top: 0;
+  margin-bottom: 1.3rem;
+  order: 0;
+  // grid-area: id;
+
+  @media (min-width: v.$md) {
+    margin-bottom: 0;
+  }
+}
+
+.date {
+  margin-bottom: 0.5rem;
+  order: 0;
+  // grid-area: date;
+
+  @media (min-width: v.$md) {
+    margin-bottom: 0;
+  }
+}
+
+.total {
+  // grid-area: total;
+
+  @media (min-width: v.$md) {
+    order: 2;
+  }
+}
+
+.name {
+  // grid-area: name;
+  margin-bottom: 1.5rem;
+
+  @media (min-width: v.$md) {
+    order: 1;
+    margin-bottom: 0;
+  }
+}
+
+.status {
+  @media (min-width: v.$md) {
+    order: 2;
+  }
+}
+
+.arrow {
+  display: none;
+  @media (min-width: v.$md) {
+    display: block;
+    order: 2;
+  }
+}
