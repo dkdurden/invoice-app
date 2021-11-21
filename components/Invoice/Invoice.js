@@ -14,17 +14,17 @@ export function Invoice({ invoice }) {
       <Link href={`/invoices/${invoice.id}`}>
         <a className={styles.container}>
           <h2 className={`${styles.id} h4`}>
-            <span className="text-gray-dark">#</span>
+            <span className="text-dark">#</span>
             {invoice.id}
           </h2>
 
           <span
-            className={`${styles.date} text text-gray-dark`}
+            className={`${styles.date} text text-dark`}
           >{`Due ${date}`}</span>
           <span className={`${styles.total} h3`}>&#163; {total}</span>
 
           <div className={`${styles.name} align-end`}>
-            <span className="text text-gray-dark">{invoice.clientName}</span>
+            <span className="text text-dark">{invoice.clientName}</span>
           </div>
 
           <div className={`${styles.status} align-end`}>

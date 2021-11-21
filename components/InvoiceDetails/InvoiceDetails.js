@@ -3,13 +3,6 @@ import { processCurrency } from "../../utilities/processCurrency";
 import { InvoicePriceBreakdown } from "../InvoicePriceBreakdown/InvoicePriceBreakdown";
 
 export function InvoiceDetails({ invoiceData }) {
-  // "senderAddress": {
-  //     "street": "19 Union Terrace",
-  //     "city": "London",
-  //     "postCode": "E1 3EZ",
-  //     "country": "United Kingdom"
-  //   },
-
   const total = processCurrency(invoiceData.total);
 
   const months = {
@@ -47,26 +40,24 @@ export function InvoiceDetails({ invoiceData }) {
       <div className={styles.groupOne}>
         <header>
           <h1 className={`h4 ${styles.heading}`}>
-            <span className="text text-gray-dark">#</span>
+            <span className="text text-light">#</span>
             {invoiceData.id}
           </h1>
-          <p className={`text-gray-dark ${styles.subheading}`}>
-            Graphic Design
-          </p>
+          <p className={`text-light ${styles.subheading}`}>Graphic Design</p>
         </header>
 
         <div className={styles.address}>
-          <p className="text-gray-dark">{invoiceData.senderAddress.street}</p>
-          <p className="text-gray-dark">{invoiceData.senderAddress.city}</p>
-          <p className="text-gray-dark">{invoiceData.senderAddress.postCode}</p>
-          <p className="text-gray-dark">{invoiceData.senderAddress.country}</p>
+          <p className="text-light">{invoiceData.senderAddress.street}</p>
+          <p className="text-light">{invoiceData.senderAddress.city}</p>
+          <p className="text-light">{invoiceData.senderAddress.postCode}</p>
+          <p className="text-light">{invoiceData.senderAddress.country}</p>
         </div>
       </div>
 
       <div className={styles.groupTwo}>
         <div className={styles.dates}>
           <div>
-            <p className="text-gray-dark">Invoice Date</p>
+            <p className="text-light">Invoice Date</p>
             <p className="h3 alt">
               <span>{createdAt.day} </span>
               <span>{createdAt.month} </span>
@@ -75,7 +66,7 @@ export function InvoiceDetails({ invoiceData }) {
           </div>
 
           <div>
-            <p className="text-gray-dark">Payment Due</p>
+            <p className="text-light">Payment Due</p>
             <p className="h3 alt">
               <span>{paymentDue.day} </span>
               <span>{paymentDue.month} </span>
@@ -84,22 +75,18 @@ export function InvoiceDetails({ invoiceData }) {
           </div>
         </div>
         <div className={styles.billTo}>
-          <p className="text-gray-dark">Bill To</p>
+          <p className="text-light">Bill To</p>
           <p className="h3 alt">{invoiceData.clientName}</p>
           <div className={styles.address}>
-            <p className="text-gray-dark">{invoiceData.clientAddress.street}</p>
-            <p className="text-gray-dark">{invoiceData.clientAddress.city}</p>
-            <p className="text-gray-dark">
-              {invoiceData.clientAddress.postCode}
-            </p>
-            <p className="text-gray-dark">
-              {invoiceData.clientAddress.country}
-            </p>
+            <p className="text-light">{invoiceData.clientAddress.street}</p>
+            <p className="text-light">{invoiceData.clientAddress.city}</p>
+            <p className="text-light">{invoiceData.clientAddress.postCode}</p>
+            <p className="text-light">{invoiceData.clientAddress.country}</p>
           </div>
         </div>
 
         <div className={styles.sentTo}>
-          <p className="text-gray-dark">Sent to</p>
+          <p className="text-light">Sent to</p>
           <p className="h3 alt">{invoiceData.clientEmail}</p>
         </div>
       </div>

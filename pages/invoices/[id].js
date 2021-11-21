@@ -6,6 +6,7 @@ import { InvoiceStatusBar } from "../../components/InvoiceStatusBar/InvoiceStatu
 import { InvoiceDetails } from "../../components/InvoiceDetails/InvoiceDetails";
 import { getInvoiceIds, getInvoiceData } from "../../library/invoices";
 import { InvoiceButtonGroup } from "../../components/InvoiceButtonGroup/InvoiceButtonGroup";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export async function getStaticPaths() {
   const paths = getInvoiceIds();
@@ -26,10 +27,12 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Invoice({ invoiceData }) {
+  const aboveBreakpoint = useMediaQuery(768);
+
   return (
     <Layout>
       <div className="container">
-        <Link href={`/`}>
+        <Link href="/">
           <a className="back-link">
             <Image src="/icon-arrow-left.svg" alt="" width="6" height="8" />
             <span className="h4">Go back</span>
@@ -38,11 +41,9 @@ export default function Invoice({ invoiceData }) {
         <InvoiceStatusBar invoiceStatus={invoiceData.status} />
 
         <InvoiceDetails invoiceData={invoiceData} />
-
-        <div className="fixed-header--bottom">
-          <InvoiceButtonGroup />
-        </div>
       </div>
+
+      {!aboveBreakpoint && <InvoiceButtonGroup />}
     </Layout>
   );
 }

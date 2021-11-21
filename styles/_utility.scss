@@ -11,8 +11,12 @@
   border-radius: 8px;
 }
 
-.text-gray-dark {
+.text-dark {
   color: v.$gray-dark;
+}
+
+.text-light {
+  color: v.$button-light-color;
 }
 
 .bg-light {

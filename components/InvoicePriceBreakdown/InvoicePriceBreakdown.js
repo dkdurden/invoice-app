@@ -1,5 +1,5 @@
 // import { useWindowSize } from "../../hooks/useWindowSize";
-import { useMediaQuery } from "../../hooks/useWindowSize";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { processCurrency } from "../../utilities/processCurrency";
 import styles from "./InvoicePriceBreakdown.module.scss";
 
@@ -12,10 +12,10 @@ export function InvoicePriceBreakdown({ invoiceData }) {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th className="alt text-gray-dark">Item Name</th>
-              <th className="alt text-gray-dark">QTY.</th>
-              <th className="alt text-gray-dark">Price</th>
-              <th className="alt text-gray-dark">Total</th>
+              <th className="alt text-light">Item Name</th>
+              <th className="alt text-light">QTY.</th>
+              <th className="alt text-light">Price</th>
+              <th className="alt text-light">Total</th>
             </tr>
           </thead>
           <tbody>
@@ -23,8 +23,8 @@ export function InvoicePriceBreakdown({ invoiceData }) {
               return (
                 <tr key={item.name}>
                   <td className="h4">{item.name}</td>
-                  <td className="h4 text-gray-dark">{item.quantity}</td>
-                  <td className="h4 text-gray-dark">
+                  <td className="h4 text-light">{item.quantity}</td>
+                  <td className="h4 text-light">
                     &#163; {processCurrency(item.price)}
                   </td>
                   <td className="h4">&#163; {processCurrency(item.total)}</td>
@@ -40,7 +40,7 @@ export function InvoicePriceBreakdown({ invoiceData }) {
               <div key={item.name} className={styles.item}>
                 <div className="flex-column">
                   <span className="h4 pb-1">{item.name}</span>
-                  <span className="h4 text-gray-dark">
+                  <span className="h4 text-light">
                     {`${item.quantity}`} x &#163;{" "}
                     {`${processCurrency(item.price)}`}
                   </span>

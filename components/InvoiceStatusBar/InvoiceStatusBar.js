@@ -6,7 +6,7 @@ export function InvoiceStatusBar({ invoiceStatus }) {
   return (
     <div className={`card ${styles.container}`}>
       <div className={styles.groupOne}>
-        <span className="text text-gray-dark">Status</span>
+        <span className="text text-dark">Status</span>
         <PaymentStatus status={invoiceStatus} />
       </div>
 

@@ -1,1 +1,10 @@
+.container {
+  background-color: white;
+  padding: 1.375rem 1.5rem;
+  display: flex;
+  justify-content: center;
 
+  button {
+    font-size: clamp(0.6rem, 2vw, 0.75rem);
+  }
+}
