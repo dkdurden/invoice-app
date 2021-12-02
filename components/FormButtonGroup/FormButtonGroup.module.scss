@@ -1,0 +1,16 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/variables" as v;
+
+.container {
+  @include m.button-group(0.49rem, 2.3vw, 0.75rem);
+
+  &.editGroup {
+    justify-content: flex-end;
+  }
+
+  &.addGroup {
+    @media (min-width: v.$md) {
+      justify-content: space-between;
+    }
+  }
+}

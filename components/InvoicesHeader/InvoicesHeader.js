@@ -1,9 +1,16 @@
 import Image from "next/image";
+import { useModalState } from "../../context/app-context";
 
 import { ButtonWithAdd } from "../ButtonWithAdd/ButtonWithAdd";
 import styles from "./InvoicesHeader.module.scss";
 
 export function InvoicesHeader() {
+  const { toggleModal } = useModalState();
+
+  const onClick = () => {
+    toggleModal("new");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.groupOne}>
@@ -23,7 +30,7 @@ export function InvoicesHeader() {
             />
           </span>
         </button>
-        <ButtonWithAdd text="New" />
+        <ButtonWithAdd text="New" onClick={onClick} />
       </div>
     </div>
   );
