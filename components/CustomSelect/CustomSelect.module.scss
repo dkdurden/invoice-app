@@ -1,0 +1,53 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.toggle {
+  @include m.form-control;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    outline: 1px solid v.$purple-dark;
+  }
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  box-shadow: 0px 10px 20px 0px #48549f40;
+  border-radius: 8px;
+
+  &:focus {
+    // Per design file
+    outline: 0;
+  }
+}
+
+.option {
+  @include m.form-control;
+
+  display: flex;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 0;
+  cursor: pointer;
+
+  &[aria-selected="true"] {
+    color: v.$purple-dark;
+  }
+
+  &:first-of-type {
+    border-top-color: transparent;
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
+  }
+
+  &:last-of-type {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+}

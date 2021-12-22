@@ -1,0 +1,27 @@
+@use "../../styles/variables" as v;
+
+.container {
+  padding: 1.5rem 1.1875rem 2rem;
+  max-width: 240px;
+  height: 243px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template: repeat(5, 16px) / repeat(7, 16px);
+  gap: 16px 15px;
+  justify-items: center;
+}
+
+.day {
+  text-align: center;
+
+  &.active {
+    color: v.$purple-dark;
+  }
+}

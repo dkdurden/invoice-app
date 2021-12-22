@@ -1,6 +1,6 @@
 import cn from "classnames";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
 
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import styles from "./FormButtonGroup.module.scss";
 
 export function FormButtonGroup({ formAction }) {

@@ -1,4 +1,5 @@
 @use "./variables" as v;
+@use "./mixins" as m;
 
 * {
   box-sizing: border-box;
@@ -25,13 +26,25 @@ a {
   text-decoration: none;
 }
 
+button,
+input {
+  font-family: v.$font-family;
+}
+
 button {
   padding: 0;
   background: 0;
   border: 0;
-  font-family: v.$font-family;
   font-weight: 700;
   cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+input[type="text"] {
+  @include m.form-control;
 }
 
 // Typography
@@ -78,10 +91,15 @@ h3,
 h4,
 .h4,
 p,
-span.text {
+span.text,
+input {
   font-size: 0.75rem;
   line-height: 1.25;
   letter-spacing: -0.25px;
+}
+
+input {
+  font-weight: 700;
 }
 
 p,
