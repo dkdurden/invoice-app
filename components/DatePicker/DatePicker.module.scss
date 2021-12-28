@@ -1,19 +1,49 @@
 @use "../../styles/variables" as v;
 
 .container {
-  padding: 1.5rem 1.1875rem 2rem;
   max-width: 240px;
-  height: 243px;
 }
+
+.popupBox {
+  height: 243px;
+  padding: 1.5rem 1.1875rem 2rem;
+}
+
+.inputContainer {
+  position: relative;
+
+  input {
+    width: 100%;
+  }
+}
+
+.calendarContainer {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: none;
+}
+
+.calendar {
+  margin-right: 1rem;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
+  max-width: 240px;
 }
 
 .grid {
   display: grid;
-  grid-template: repeat(5, 16px) / repeat(7, 16px);
+  grid-template: repeat(6, 16px) / repeat(7, 16px);
   gap: 16px 15px;
   justify-items: center;
 }
@@ -21,7 +51,8 @@
 .day {
   text-align: center;
 
-  &.active {
+  &.active,
+  &:focus {
     color: v.$purple-dark;
   }
 }
