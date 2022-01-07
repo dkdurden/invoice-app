@@ -1,0 +1,47 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.container {
+  max-width: 240px;
+}
+
+.popupBox {
+  height: 243px;
+  padding: 2.5rem 1.1875rem 2rem;
+}
+
+.input {
+  @include m.form-control;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  > span {
+    display: inline-block;
+    margin-top: 1px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  max-width: 240px;
+}
+
+.grid {
+  display: grid;
+  grid-template: repeat(6, 16px) / repeat(7, 16px);
+  gap: 16px 15px;
+  justify-items: center;
+}
+
+.day {
+  text-align: center;
+
+  &.active,
+  &:focus {
+    color: v.$purple-dark;
+  }
+}

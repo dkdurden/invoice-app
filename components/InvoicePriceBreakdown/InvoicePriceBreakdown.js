@@ -38,7 +38,7 @@ export function InvoicePriceBreakdown({ invoiceData }) {
           {invoiceData.items.map((item) => {
             return (
               <div key={item.name} className={styles.item}>
-                <div className="flex-column">
+                <div className="d-flex flex-column">
                   <span className="h4 pb-1">{item.name}</span>
                   <span className="h4 text-light">
                     {`${item.quantity}`} x &#163;{" "}

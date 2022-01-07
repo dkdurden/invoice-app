@@ -1,8 +1,7 @@
-import Image from "next/image";
+import React, { useState } from "react";
 
 import { Layout } from "../components/Layout/Layout";
 import { InvoicesHeader } from "../components/InvoicesHeader/InvoicesHeader";
-import { Invoice } from "../components/Invoice/Invoice";
 import { EmptyInvoices } from "../components/EmptyInvoices/EmptyInvoices";
 import { getAllInvoices } from "../library/invoices";
 import { Invoices } from "../components/Invoices/Invoices";
@@ -18,6 +17,9 @@ export async function getStaticProps() {
 
 export default function Home({ invoices }) {
   const showInvoices = true;
+
+  const [value, setValue] = useState("Select");
+
   return (
     <Layout>
       <div className="container">

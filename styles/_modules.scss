@@ -58,21 +58,3 @@
   align-items: center;
   gap: 1.25rem;
 }
-
-// make mixin?
-.fixed-header {
-  max-height: 72px;
-  overflow: hidden;
-  position: fixed;
-  z-index: 2;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &--bottom {
-    @extend .fixed-header;
-
-    bottom: 0;
-  }
-}

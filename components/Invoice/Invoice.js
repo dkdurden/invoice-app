@@ -23,11 +23,11 @@ export function Invoice({ invoice }) {
           >{`Due ${date}`}</span>
           <span className={`${styles.total} h3`}>&#163; {total}</span>
 
-          <div className={`${styles.name} align-end`}>
+          <div className={`${styles.name} d-flex align-end`}>
             <span className="text text-dark">{invoice.clientName}</span>
           </div>
 
-          <div className={`${styles.status} align-end`}>
+          <div className={`${styles.status} d-flex align-end`}>
             <PaymentStatus status={invoice.status} />
           </div>
 

@@ -19,6 +19,10 @@
   color: v.$button-light-color;
 }
 
+.text-purple {
+  color: v.$purple-dark;
+}
+
 .bg-light {
   background-color: white;
 }
@@ -29,13 +33,15 @@
 
 // Flex
 
-.align-end {
+.d-flex {
   display: flex;
+}
+
+.align-end {
   justify-content: flex-end;
 }
 
 .flex-column {
-  display: flex;
   flex-direction: column;
 }
 
