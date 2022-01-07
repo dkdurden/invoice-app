@@ -4,7 +4,7 @@ import { useDatePicker } from "./context";
 import styles from "./DatePicker.module.scss";
 import { focusElement, unfocusElement } from "../../utilities/dom";
 
-export function useGrid() {
+export function useGrid(close) {
   const { dispatch, activeIndexRef, date } = useDatePicker();
   const gridRef = React.useRef(null);
 
@@ -96,9 +96,11 @@ export function useGrid() {
           dispatch({
             type: "set_date",
             payload: {
-              day: currentDay.innerText,
+              date: currentDay.dataset.date,
             },
           });
+
+          close();
 
           return;
         default:
@@ -114,7 +116,7 @@ export function useGrid() {
 
     // Refs are static and safe to include for the sake of exhaustive deps
     // https://github.com/facebook/react/issues/20752#issuecomment-790055486
-  }, [activeIndexRef, dispatch, date]);
+  }, [activeIndexRef, dispatch, date, close]);
 
   function selectDayBox(index) {
     return gridRef.current.querySelector(`#day-box-${index}`);

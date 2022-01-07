@@ -3,7 +3,7 @@ import cn from "classnames";
 import { useDatePicker } from "./context";
 import styles from "./DatePicker.module.scss";
 
-export function DayBox({ day, index }) {
+export function DayBox({ day, index, close }) {
   const { dispatch } = useDatePicker();
 
   function handleClick(e) {
@@ -18,11 +18,13 @@ export function DayBox({ day, index }) {
         date,
       },
     });
+
+    close();
   }
 
   return (
     <button
-      className={cn(styles.day, "h4")}
+      className={cn(styles.day, "h4", day.active ? styles.active : null)}
       key={day.key}
       id={`day-box-${index}`}
       disabled={day.disabled}

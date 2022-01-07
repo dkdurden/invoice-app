@@ -5,7 +5,6 @@ const DateContext = React.createContext();
 function DateProvider({ children }) {
   const initialState = {
     date: new Date(),
-    showPopup: false,
   };
 
   function reducer(state, action) {
@@ -32,12 +31,6 @@ function DateProvider({ children }) {
 
         return {
           date: new Date(currentDate.setDate(date)),
-        };
-      }
-
-      case "toggle_popup": {
-        return {
-          showPopup: !state.showPopup,
         };
       }
 
@@ -91,7 +84,6 @@ function DateProvider({ children }) {
 
   const value = {
     date: state.date,
-    showPopup: state.showPopup,
     dispatch,
     createDateArray,
     activeIndexRef,
