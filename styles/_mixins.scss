@@ -29,3 +29,10 @@
     outline: 1px solid v.$purple-dark;
   }
 }
+
+@mixin form-label($mb: 0) {
+  display: block;
+  color: v.$button-light-color;
+  margin-bottom: $mb;
+  margin-top: 0;
+}

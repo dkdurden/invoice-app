@@ -1,0 +1,16 @@
+@import "~simplebar/dist/simplebar.css";
+
+.simplebar-scrollbar:before {
+  background-color: #dfe3fa;
+  height: 112px;
+  width: 8px;
+}
+
+.simplebar-track {
+  right: 5%;
+  margin-top: 7.5rem;
+}
+
+// .simplebar-content {
+//   padding-bottom: 0 !important;
+// }

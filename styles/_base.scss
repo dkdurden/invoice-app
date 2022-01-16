@@ -43,8 +43,21 @@ button {
   }
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"] {
   @include m.form-control;
+
+  &:read-only {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    color: v.$gray-dark;
+
+    &:focus,
+    &.focus {
+      outline: none;
+    }
+  }
 }
 
 // Typography
@@ -92,7 +105,9 @@ h4,
 .h4,
 p,
 span.text,
-input {
+input,
+label,
+.label {
   font-size: 0.75rem;
   line-height: 1.25;
   letter-spacing: -0.25px;

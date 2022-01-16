@@ -1,9 +1,13 @@
-// import { useWindowSize } from "../../hooks/useWindowSize";
+import React from "react";
+
+import { InvoiceContext } from "../../context/invoice-context";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { processCurrency } from "../../utilities/processCurrency";
 import styles from "./InvoicePriceBreakdown.module.scss";
 
-export function InvoicePriceBreakdown({ invoiceData }) {
+export function InvoicePriceBreakdown() {
+  const invoiceData = React.useContext(InvoiceContext);
+
   const aboveBreakpoint = useMediaQuery(768);
 
   return (

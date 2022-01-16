@@ -12,10 +12,12 @@
     "@headlessui/react": "^1.4.2",
     "animate.css": "^4.1.1",
     "classnames": "^2.3.1",
+    "nanoid": "^3.2.0",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.42.1"
+    "sass": "^1.42.1",
+    "simplebar": "^5.3.6"
   },
   "devDependencies": {
     "eslint": "7.32.0",

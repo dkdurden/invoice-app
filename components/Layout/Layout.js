@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useModalState } from "../../context/app-context";
 
+import { useModalState } from "../../context/app-context";
 import { Header } from "../Header/Header";
 import { InvoiceFormModal } from "../InvoiceFormModal/InvoiceFormModal";
 import styles from "./Layout.module.scss";

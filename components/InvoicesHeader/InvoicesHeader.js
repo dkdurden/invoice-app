@@ -8,7 +8,7 @@ export function InvoicesHeader() {
   const { toggleModal } = useModalState();
 
   const onClick = () => {
-    toggleModal("new");
+    toggleModal("add-invoice");
   };
 
   return (

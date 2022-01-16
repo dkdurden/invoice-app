@@ -1,8 +1,13 @@
+import React from "react";
+
+import { InvoiceContext } from "../../context/invoice-context";
 import styles from "./InvoiceDetails.module.scss";
 import { processCurrency } from "../../utilities/processCurrency";
 import { InvoicePriceBreakdown } from "../InvoicePriceBreakdown/InvoicePriceBreakdown";
 
-export function InvoiceDetails({ invoiceData }) {
+export function InvoiceDetails() {
+  const invoiceData = React.useContext(InvoiceContext);
+
   const total = processCurrency(invoiceData.total);
 
   const months = {
@@ -91,7 +96,7 @@ export function InvoiceDetails({ invoiceData }) {
         </div>
       </div>
       <div className={styles.groupThree}>
-        <InvoicePriceBreakdown invoiceData={invoiceData} />
+        <InvoicePriceBreakdown />
 
         <div className={`${styles.total} ${styles.row}`}>
           <p className="alt">Grand Total</p>
