@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext } from "react";
 
 const AppContext = createContext();
 
+// Form modal
 export function useModalState() {
   const context = useContext(AppContext);
 
@@ -14,6 +15,7 @@ export function useModalState() {
 }
 
 export function StateProvider({ children }) {
+  // Form modal, need to rename
   const [modalState, setModalState] = useState({
     open: false,
     formAction: null,
@@ -37,6 +39,7 @@ export function StateProvider({ children }) {
   };
 
   const value = {
+    // Form modal
     modalState,
     toggleModal,
   };

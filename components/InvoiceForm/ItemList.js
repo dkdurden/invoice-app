@@ -91,7 +91,6 @@ function ItemsLG({ items }) {
 
 // For smaller screens
 function ItemsSM({ items }) {
-  console.log(items);
   return (
     <>
       {items.map((item) => (
