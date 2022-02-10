@@ -13,12 +13,7 @@ function Select({ children, value, onChange }) {
   };
 
   return (
-    <Listbox
-      as="div"
-      className="custom-select"
-      value={value}
-      onChange={onChange}
-    >
+    <Listbox as="div" value={value} onChange={onChange}>
       <Listbox.Button as={Fragment}>
         {({ open }) => (
           <button className={cn(toggle, `${open ? focus : ""}`)}>
@@ -33,12 +28,7 @@ function Select({ children, value, onChange }) {
         )}
       </Listbox.Button>
 
-      <Listbox.Options
-        ref={optionsRef}
-        // className={cn(menu, "animate__animated", "animate__bounceInLeft")}
-        className={menu}
-        onFocus={onFocus}
-      >
+      <Listbox.Options ref={optionsRef} className={menu} onFocus={onFocus}>
         {children}
       </Listbox.Options>
     </Listbox>

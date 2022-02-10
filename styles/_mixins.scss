@@ -36,3 +36,9 @@
   margin-bottom: $mb;
   margin-top: 0;
 }
+
+@mixin pop-up-menu {
+  position: absolute;
+  box-shadow: 0px 10px 20px 0px #48549f40;
+  border-radius: 8px;
+}

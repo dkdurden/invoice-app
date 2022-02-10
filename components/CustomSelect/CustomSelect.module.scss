@@ -14,13 +14,10 @@
 }
 
 .menu {
-  position: absolute;
+  @include m.pop-up-menu;
   width: 240px;
   list-style: none;
   padding: 0;
-  // margin-top: 1.5rem;
-  box-shadow: 0px 10px 20px 0px #48549f40;
-  border-radius: 8px;
 
   &:focus {
     // Per design file
