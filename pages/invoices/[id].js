@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 import { Layout } from "../../components/Layout/Layout";
@@ -11,30 +12,38 @@ import { getInvoiceIds, getInvoiceData } from "../../library/invoices";
 import { InvoiceButtonGroup } from "../../components/InvoiceButtonGroup/InvoiceButtonGroup";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { DeleteInvoiceModal } from "../../components/DeleteInvoiceModal/DeleteInvoiceModal";
+import { useInvoice } from "../../context/app-context";
 
-export async function getStaticPaths() {
-  const paths = getInvoiceIds();
-  return {
-    paths: paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   const paths = getInvoiceIds();
+//   return {
+//     paths: paths,
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps({ params }) {
-  const invoiceData = await getInvoiceData(params.id);
+// export async function getStaticProps({ params }) {
+//   const invoiceData = await getInvoiceData(params.id);
 
-  return {
-    props: {
-      invoiceData,
-    },
-  };
-}
+//   return {
+//     props: {
+//       invoiceData,
+//     },
+//   };
+// }
 
-export default function Invoice({ invoiceData }) {
+export default function Invoice() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const invoiceData = useInvoice(id);
+
   const aboveBreakpoint = useMediaQuery(768);
 
   let [modalOpen, setModalOpen] = React.useState(false);
   const toggleModal = () => setModalOpen((prevState) => !prevState);
+
+  if (invoiceData == null) return null;
 
   return (
     <Layout>

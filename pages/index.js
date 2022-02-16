@@ -5,20 +5,21 @@ import { InvoicesHeader } from "../components/InvoicesHeader/InvoicesHeader";
 import { EmptyInvoices } from "../components/EmptyInvoices/EmptyInvoices";
 import { getAllInvoices } from "../library/invoices";
 import { Invoices } from "../components/Invoices/Invoices";
+import { useInvoices } from "../context/app-context";
 
-export async function getStaticProps() {
-  const invoices = getAllInvoices();
-  return {
-    props: {
-      invoices,
-    },
-  };
-}
+// export async function getStaticProps() {
+//   const invoices = getAllInvoices();
+//   return {
+//     props: {
+//       invoices,
+//     },
+//   };
+// }
 
-export default function Home({ invoices }) {
-  const showInvoices = true;
+export default function Home() {
+  const { invoices } = useInvoices();
 
-  const [value, setValue] = useState("Select");
+  const showInvoices = invoices && invoices.length > 0;
 
   return (
     <Layout>

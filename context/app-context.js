@@ -14,13 +14,40 @@ export function useModalState() {
   };
 }
 
-export function StateProvider({ children }) {
+export function useInvoices() {
+  const context = useContext(AppContext);
+
+  return {
+    invoices: context.invoices,
+    removeInvoice: context.removeInvoice,
+    addInvoice: context.addInvoice,
+  };
+}
+
+export function useInvoice(id) {
+  const context = useContext(AppContext);
+
+  return context.invoices.find((invoice) => invoice.id === id);
+}
+
+export function StateProvider({ children, initialInvoices }) {
   // Form modal, need to rename
   const [modalState, setModalState] = useState({
     open: false,
     formAction: null,
     invoiceData: null,
   });
+
+  const [invoices, setInvoices] = useState(initialInvoices);
+
+  const removeInvoice = (id) =>
+    setInvoices((prevState) =>
+      prevState.filter((invoice) => invoice.id !== id)
+    );
+
+  const addInvoice = (invoiceData) => {
+    setInvoices((prevState) => [...prevState, invoiceData]);
+  };
 
   const toggleModal = (formAction, invoiceData) => {
     setModalState((prevState) => {
@@ -42,6 +69,9 @@ export function StateProvider({ children }) {
     // Form modal
     modalState,
     toggleModal,
+    invoices,
+    removeInvoice,
+    addInvoice,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -34,7 +34,9 @@ export function FormButtonGroup({ formAction }) {
         </button>
         <div>
           <button className="button--dark mx-1">Save as Draft</button>
-          <button className="button--primary">{"Save & Send"}</button>
+          <button className="button--primary" type="submit" form="invoice-form">
+            {"Save & Send"}
+          </button>
         </div>
       </div>
     );
