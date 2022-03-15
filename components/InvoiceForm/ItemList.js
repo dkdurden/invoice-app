@@ -6,24 +6,27 @@ import { FormGroup } from "./FormGroup";
 import { Label } from "./Label";
 import styles from "./ItemList.module.scss";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { useModalState } from "../../context/app-context";
-import { nanoid } from "nanoid";
 
-export function ItemList() {
-  const { invoiceData } = useModalState();
-
-  const [items, setItems] = React.useState(
-    createInitialState(invoiceData?.items)
-  );
-  const addItem = (e) => setItems((prevState) => [...prevState, {}]);
-
+export function ItemList({ items, addItem, deleteItem, handleItemChange }) {
   const aboveBreakpoint = useMediaQuery(768);
 
   return (
     <>
       <p className={styles.heading}>Item List</p>
 
-      {aboveBreakpoint ? <ItemsLG items={items} /> : <ItemsSM items={items} />}
+      {aboveBreakpoint ? (
+        <ItemsLG
+          items={items}
+          handleItemChange={handleItemChange}
+          deleteItem={deleteItem}
+        />
+      ) : (
+        <ItemsSM
+          items={items}
+          handleItemChange={handleItemChange}
+          deleteItem={deleteItem}
+        />
+      )}
 
       <button
         type="button"
@@ -36,7 +39,7 @@ export function ItemList() {
   );
 }
 
-function ItemsLG({ items }) {
+function ItemsLG({ items, handleItemChange, deleteItem }) {
   return (
     <>
       <div className={styles.row_lg}>
@@ -54,18 +57,37 @@ function ItemsLG({ items }) {
         </p>
       </div>
 
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div className={styles.row_lg} key={item.id}>
           <FormGroup>
-            <input aria-labelledby="item-name" type="text" />
+            <input
+              aria-labelledby="item-name"
+              type="text"
+              name="name"
+              onChange={handleItemChange}
+              data-index={index}
+            />
           </FormGroup>
 
           <FormGroup>
-            <input aria-labelledby="item-quantity" type="text" />
+            <input
+              aria-labelledby="item-quantity"
+              type="text"
+              name="quantity"
+              onChange={handleItemChange}
+              data-index={index}
+              className={styles.qty}
+            />
           </FormGroup>
 
           <FormGroup>
-            <input aria-labelledby="item-price" type="text" />
+            <input
+              aria-labelledby="item-price"
+              type="text"
+              name="price"
+              onChange={handleItemChange}
+              data-index={index}
+            />
           </FormGroup>
 
           <FormGroup>
@@ -79,7 +101,7 @@ function ItemsLG({ items }) {
           </FormGroup>
 
           <div className={styles.icon}>
-            <button type="button">
+            <button type="button" onClick={deleteItem} data-index={index}>
               <Image src="/icon-delete.svg" alt="" width="12.44" height="16" />
             </button>
           </div>
@@ -90,25 +112,40 @@ function ItemsLG({ items }) {
 }
 
 // For smaller screens
-function ItemsSM({ items }) {
+function ItemsSM({ items, handleItemChange }) {
   return (
     <>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div className={styles.row_sm} key={item.id}>
           <FormGroup>
             <Label htmlFor="item-name">Item Name</Label>
-            <input id="item-name" type="text" />
+            <input
+              id="item-name"
+              type="text"
+              onChange={handleItemChange}
+              data-index={index}
+            />
           </FormGroup>
 
           <div className={styles.subgroup}>
             <FormGroup>
               <Label htmlFor="item-quantity">Qty.</Label>
-              <input id="item-quantity" type="text" />
+              <input
+                id="item-quantity"
+                type="text"
+                onChange={handleItemChange}
+                data-index={index}
+              />
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="item-price">Price</Label>
-              <input id="item-price" type="text" />
+              <input
+                id="item-price"
+                type="text"
+                onChange={handleItemChange}
+                data-index={index}
+              />
             </FormGroup>
 
             <FormGroup>
@@ -137,13 +174,4 @@ function ItemsSM({ items }) {
       ))}
     </>
   );
-}
-
-function createInitialState(items) {
-  return items != null
-    ? items.map((item) => ({
-        ...item,
-        id: nanoid(),
-      }))
-    : [];
 }

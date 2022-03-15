@@ -1,8 +1,30 @@
 @use "../../styles/variables" as v;
 @use "../../styles/mixins" as m;
 
+.labelGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+}
+
 .label {
-  @include m.form-label(0.625rem);
+  @include m.form-label(0);
+}
+
+.errorMsg {
+  font-size: 0.625rem;
+  line-height: 15px;
+  letter-spacing: -0.21px;
+  color: v.$danger;
+}
+
+.input.invalid::after {
+  content: "can't be empty";
+  position: absolute;
+  display: block;
+
+  @extend .errorMsg;
 }
 
 .grid {

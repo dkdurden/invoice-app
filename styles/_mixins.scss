@@ -28,6 +28,10 @@
   &.focus {
     outline: 1px solid v.$purple-dark;
   }
+
+  &.invalid {
+    border-color: v.$danger;
+  }
 }
 
 @mixin form-label($mb: 0) {
