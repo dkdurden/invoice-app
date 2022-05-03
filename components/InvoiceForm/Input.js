@@ -13,6 +13,7 @@ export function Input({
   onBlur,
   error,
   showError = true,
+  index,
 }) {
   return (
     <div className={cn(styles.input, error && showError && styles.invalid)}>
@@ -27,6 +28,7 @@ export function Input({
         onBlur={onBlur}
         className={cn("test", error && "invalid")}
         style={{ width: "100%" }}
+        data-index={index}
       />
     </div>
   );

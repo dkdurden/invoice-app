@@ -13,7 +13,7 @@ import { useInvoices } from "../../context/app-context";
 import { Input } from "./Input";
 
 const initialState = {
-  id: "",
+  // id: "",
   paymentDue: "",
   description: "",
   clientName: "",
@@ -31,7 +31,7 @@ const initialState = {
     country: "",
   },
   items: [],
-  total: "",
+  // total: "",
 };
 
 function validateStateObj(state) {
@@ -80,6 +80,8 @@ function validateForm(state) {
 
   const errors = validateStateObj(state);
 
+  console.log(errors);
+
   if (errors != null) {
     errorMessages.push("All items must not be empty");
   }
@@ -97,11 +99,10 @@ export function InvoiceForm() {
 
   const handleValueChange = (e) => {
     const { name } = e.target;
-    console.log(e.target.value, e.target);
     setState((prevState) => ({ ...prevState, [name]: e.target.value }));
 
-    if (e.target.value && name in errors) {
-      console.log(e.target.value, name in errors);
+    // Clear errors
+    if (e.target.value && errors && name in errors) {
       setErrors((prevState) => ({ ...prevState, [name]: false }));
     }
   };
@@ -121,6 +122,17 @@ export function InvoiceForm() {
         [addressValueName]: e.target.value,
       },
     }));
+
+    // Clear errors
+    if (e.target.value && errors?.[addressFieldName]?.[addressValueName]) {
+      setErrors((prevState) => ({
+        ...prevState,
+        [addressFieldName]: {
+          ...prevState[addressFieldName],
+          [addressValueName]: false,
+        },
+      }));
+    }
   };
 
   const addItem = () => {
@@ -165,9 +177,59 @@ export function InvoiceForm() {
   };
 
   // Handle input error state on blur
-  const onBlur = (e) => {
+  // addressInputID - for nested address inputs, ex. "senderAddress-city"
+  // itemIndex - for dynamic item inputs
+  const createHandleBlur = (addressInputID, itemIndex) => (e) => {
     if (!e.target.value) {
-      setErrors((prevState) => ({ ...prevState, [e.target.name]: true }));
+      if (addressInputID != null) {
+        const [addressFieldName, addressValueName] = addressInputID.split("-");
+
+        setErrors((prevState) => {
+          if (prevState)
+            return {
+              ...prevState,
+              [addressFieldName]: {
+                ...prevState[addressFieldName],
+                [addressValueName]: true,
+              },
+            };
+
+          return {
+            [addressFieldName]: {
+              [addressValueName]: true,
+            },
+          };
+        });
+      } else if (itemIndex != null) {
+        setErrors((prevState) => {
+          if (prevState)
+            return {
+              ...prevState,
+              items: prevState.items.map((item, index) => {
+                if (parseInt(itemIndex) !== index) {
+                  return item;
+                }
+
+                return {
+                  ...item,
+                  [e.target.name]: true,
+                };
+              }),
+            };
+
+          let items = [];
+
+          for (let i = 0; i < parseInt(itemIndex); i++) {
+            items.push({});
+          }
+
+          return {
+            items: [],
+          };
+        });
+      } else {
+        setErrors((prevState) => ({ ...prevState, [e.target.name]: true }));
+      }
     }
   };
 
@@ -176,13 +238,14 @@ export function InvoiceForm() {
     // alert("Submitted!");
 
     const [hasErrors, errorMessages, errors] = validateForm(state);
-    console.log(hasErrors, errorMessages, errors);
 
     if (hasErrors) {
       setErrors(errors);
       setErrorList(errorMessages);
+      console.log(errors, errorMessages);
     } else {
-      alert("Submitted!");
+      const invoiceWithID = { id: nanoid(6), total: 400, ...state };
+      addInvoice(invoiceWithID);
     }
   };
 
@@ -207,6 +270,7 @@ export function InvoiceForm() {
             ariaLabelledBy="bill-from from-street-label"
             value={state.senderAddress.street}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("senderAddress-street")}
             error={errors?.senderAddress?.street}
             showError={false}
           />
@@ -222,6 +286,7 @@ export function InvoiceForm() {
             ariaLabelledBy="bill-from from-city-label"
             value={state.senderAddress.city}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("senderAddress-city")}
             error={errors?.senderAddress?.city}
           />
         </FormGroup>
@@ -235,6 +300,7 @@ export function InvoiceForm() {
             ariaLabelledBy="bill-from from-code-label"
             value={state.senderAddress.postCode}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("senderAddress-postCode")}
             error={errors?.senderAddress?.postCode}
           />
         </FormGroup>
@@ -249,6 +315,7 @@ export function InvoiceForm() {
             ariaLabelledBy="bill-from from-country-label"
             value={state.senderAddress.country}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("senderAddress-country")}
             error={errors?.senderAddress?.country}
           />
         </FormGroup>
@@ -269,7 +336,7 @@ export function InvoiceForm() {
             name="clientName"
             value={state.clientName}
             onChange={handleValueChange}
-            onBlur={onBlur}
+            onBlur={createHandleBlur()}
             error={errors?.clientName}
             showError={false}
           />
@@ -286,52 +353,74 @@ export function InvoiceForm() {
             name="clientEmail"
             value={state.clientEmail}
             onChange={handleValueChange}
+            onBlur={createHandleBlur()}
             error={errors?.clientEmail}
             showError={false}
           />
         </FormGroup>
 
         <FormGroup className={styles.wide}>
-          <Label id="to-street-label">Street Adress</Label>
-          <input
+          <Label
+            id="to-street-label"
+            error={errors?.clientAddress?.street}
+            showError
+          >
+            Street Adress
+          </Label>
+          <Input
             id="clientAddress-street"
             type="text"
-            aria-labelledby="bill-to to-street-label"
+            ariaLabelledBy="bill-to to-street-label"
             value={state.clientAddress.street}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("clientAddress-street")}
+            error={errors?.clientAddress?.street}
+            showError={false}
           />
         </FormGroup>
 
         <FormGroup>
-          <Label id="to-city-label">City</Label>
-          <input
+          <Label id="to-city-label" error={errors?.clientAddress?.city}>
+            City
+          </Label>
+          <Input
             id="clientAddress-city"
             type="text"
-            aria-labelledby="bill-to to-city-label"
+            ariaLabelledBy="bill-to to-city-label"
             value={state.clientAddress.city}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("clientAddress-city")}
+            error={errors?.clientAddress?.city}
           />
         </FormGroup>
 
         <FormGroup>
-          <Label id="to-code-label">Post Code</Label>
-          <input
+          <Label id="to-code-label" error={errors?.clientAddress?.postCode}>
+            Post Code
+          </Label>
+          <Input
             id="clientAddress-postCode"
             type="text"
             aria-labelledby="bill-to to-code-label"
             value={state.clientAddress.postCode}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("clientAddress-postCode")}
+            error={errors?.clientAddress?.postCode}
           />
         </FormGroup>
 
         <FormGroup className={!aboveBreakpoint ? styles.wide : null}>
-          <Label id="to-country-label">Country</Label>
-          <input
+          <Label id="to-country-label" error={errors?.clientAddress?.country}>
+            Country
+          </Label>
+          <Input
             id="clientAddress-country"
             type="text"
             aria-labelledby="bill-to to-country-label"
             value={state.clientAddress.country}
             onChange={handleAddressChange}
+            onBlur={createHandleBlur("clientAddress-country")}
+            error={errors?.clientAddress?.country}
           />
         </FormGroup>
       </div>
@@ -355,14 +444,23 @@ export function InvoiceForm() {
         </FormGroup>
 
         <FormGroup className={styles.wide}>
-          <Label htmlFor="project-description">Project Description</Label>
-          <input
+          <Label
+            htmlFor="project-description"
+            error={errors?.description}
+            showError
+          >
+            Project Description
+          </Label>
+          <Input
             id="project-description"
             placeholder="e.g. Graphic Design Service"
             type="text"
             name="description"
             value={state.description}
             onChange={handleValueChange}
+            onBlur={createHandleBlur()}
+            error={errors?.description}
+            showError={false}
           />
         </FormGroup>
       </div>
@@ -372,6 +470,8 @@ export function InvoiceForm() {
         addItem={addItem}
         deleteItem={deleteItem}
         handleItemChange={handleItemChange}
+        createHandleBlur={createHandleBlur}
+        errors={errors}
       />
     </form>
   );

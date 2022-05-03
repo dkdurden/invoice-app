@@ -2,12 +2,20 @@ import Image from "next/image";
 import React from "react";
 import cn from "classnames";
 
+import { Input } from "./Input";
 import { FormGroup } from "./FormGroup";
 import { Label } from "./Label";
 import styles from "./ItemList.module.scss";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-export function ItemList({ items, addItem, deleteItem, handleItemChange }) {
+export function ItemList({
+  items,
+  addItem,
+  deleteItem,
+  handleItemChange,
+  createHandleBlur,
+  errors,
+}) {
   const aboveBreakpoint = useMediaQuery(768);
 
   return (
@@ -18,13 +26,17 @@ export function ItemList({ items, addItem, deleteItem, handleItemChange }) {
         <ItemsLG
           items={items}
           handleItemChange={handleItemChange}
+          createHandleBlur={createHandleBlur}
           deleteItem={deleteItem}
+          errors={errors}
         />
       ) : (
         <ItemsSM
           items={items}
           handleItemChange={handleItemChange}
+          createHandleBlur={createHandleBlur}
           deleteItem={deleteItem}
+          errors={errors}
         />
       )}
 
@@ -39,7 +51,13 @@ export function ItemList({ items, addItem, deleteItem, handleItemChange }) {
   );
 }
 
-function ItemsLG({ items, handleItemChange, deleteItem }) {
+function ItemsLG({
+  items,
+  handleItemChange,
+  createHandleBlur,
+  deleteItem,
+  errors,
+}) {
   return (
     <>
       <div className={styles.row_lg}>
@@ -56,37 +74,41 @@ function ItemsLG({ items, handleItemChange, deleteItem }) {
           Total
         </p>
       </div>
-
       {items.map((item, index) => (
         <div className={styles.row_lg} key={item.id}>
           <FormGroup>
-            <input
-              aria-labelledby="item-name"
+            <Input
+              ariaLabelledBy="item-name"
               type="text"
               name="name"
               onChange={handleItemChange}
-              data-index={index}
+              index={index}
+              error={errors?.items?.[index]?.name}
             />
           </FormGroup>
 
           <FormGroup>
-            <input
-              aria-labelledby="item-quantity"
+            <Input
+              ariaLabelledBy="item-quantity"
               type="text"
               name="quantity"
               onChange={handleItemChange}
-              data-index={index}
+              onBlur={createHandleBlur(null, index)}
+              index={index}
               className={styles.qty}
+              error={errors?.items?.[index]?.quantity}
+              showError={false}
             />
           </FormGroup>
 
           <FormGroup>
-            <input
-              aria-labelledby="item-price"
+            <Input
+              ariaLabelledBy="item-price"
               type="text"
               name="price"
               onChange={handleItemChange}
-              data-index={index}
+              index={index}
+              error={errors?.items?.[index]?.price}
             />
           </FormGroup>
 
@@ -112,39 +134,44 @@ function ItemsLG({ items, handleItemChange, deleteItem }) {
 }
 
 // For smaller screens
-function ItemsSM({ items, handleItemChange }) {
+function ItemsSM({ items, handleItemChange, errors }) {
   return (
     <>
       {items.map((item, index) => (
         <div className={styles.row_sm} key={item.id}>
           <FormGroup>
             <Label htmlFor="item-name">Item Name</Label>
-            <input
+            <Input
               id="item-name"
               type="text"
               onChange={handleItemChange}
-              data-index={index}
+              index={index}
+              error={errors?.items?.[index].name}
             />
           </FormGroup>
 
           <div className={styles.subgroup}>
             <FormGroup>
               <Label htmlFor="item-quantity">Qty.</Label>
-              <input
+              <Input
                 id="item-quantity"
                 type="text"
                 onChange={handleItemChange}
-                data-index={index}
+                index={index}
+                error={errors?.items?.[index].quantity}
+                showError={false}
               />
             </FormGroup>
 
             <FormGroup>
               <Label htmlFor="item-price">Price</Label>
-              <input
+              <Input
                 id="item-price"
                 type="text"
                 onChange={handleItemChange}
-                data-index={index}
+                index={index}
+                error={errors?.items?.[index].price}
+                showError={false}
               />
             </FormGroup>
 
