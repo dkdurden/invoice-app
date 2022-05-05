@@ -1,8 +1,44 @@
 import Image from "next/image";
+import React from "react";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
 import styles from "./Header.module.scss";
 
-export function Header({ children }) {
+function ThemeToggle() {
+  const [theme, setTheme] = useLocalStorage("theme", "light");
+
+  React.useEffect(() => {
+    if (theme === "dark") {
+      window.document.body.classList.add("dark");
+    } else {
+      window.document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const toggle = () => setTheme(theme === "light" ? "dark" : "light");
+
+  return (
+    <button className={styles.toggle} onClick={toggle}>
+      {theme === "dark" ? (
+        <Image
+          src="/icon-sun.svg"
+          alt="Theme toggle icon"
+          width={"20px"}
+          height={"20px"}
+        />
+      ) : (
+        <Image
+          src="/icon-moon.svg"
+          alt="Theme toggle icon"
+          width={"20px"}
+          height={"20px"}
+        />
+      )}
+    </button>
+  );
+}
+
+export function Header() {
   return (
     <>
       <div className={styles.shape}>
@@ -15,14 +51,8 @@ export function Header({ children }) {
         />
       </div>
       <div className={styles.group}>
-        <button className={styles.toggle}>
-          <Image
-            src="/icon-moon.svg"
-            alt="Theme toggle icon"
-            width={"20px"}
-            height={"20px"}
-          />
-        </button>
+        <ThemeToggle />
+
         <span className={styles.avatar}>
           <Image
             src="/image-avatar.jpg"

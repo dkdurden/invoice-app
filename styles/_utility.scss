@@ -7,12 +7,17 @@
 }
 
 .card {
-  background-color: white;
+  // dark mode support
+  background-color: var(--bg-card);
   border-radius: 8px;
 }
 
 .text-dark {
-  color: v.$gray-dark;
+  color: var(--text1);
+}
+
+.text-dark-alt {
+  color: var(--text2);
 }
 
 .text-light {

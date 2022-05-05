@@ -3,3 +3,38 @@
 @use "./layout";
 @use "./utility";
 @use "./simplebar";
+@use "./variables" as v;
+
+// CSS variables for light/dark mode
+// Put here because next server doesn't like them in _variables.scss
+:root {
+  --main-bg: #{v.$lm-main-bg};
+  --bg-card: white;
+  --main-text: black;
+  --text1: #{v.$gray-dark};
+  --text2: #858bb2;
+}
+
+body.dark {
+  --main-bg: #{v.$dm-main-bg};
+  --bg-card: #{v.$dm-bg-dark-1};
+  --main-text: white;
+  --text1: #{v.$gray-light};
+  --text2: white;
+}
+
+body {
+  background-color: var(--main-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+  // dark mode support
+  color: var(--main-text);
+}

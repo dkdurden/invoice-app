@@ -17,7 +17,8 @@
     margin-bottom: 0.25rem;
   }
   span {
-    color: v.$gray-dark;
+    // color: v.$gray-dark;
+    color: var(--text1);
   }
 }
 
@@ -64,6 +65,9 @@
   margin-top: 3.5rem;
   background: white;
 
+  // Fix issue where menu was under empty invoice svg
+  z-index: 1;
+
   &:focus {
     // Per design file
     outline: 0;
@@ -89,6 +93,9 @@
   .btnText {
     display: inline-block;
     padding-right: 0.5rem;
+
+    // overwrite css variable
+    color: white;
 
     @media (min-width: v.$md) {
       padding-right: 0;
