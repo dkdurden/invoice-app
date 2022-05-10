@@ -177,13 +177,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
 
             <FormGroup>
               <Label htmlFor="item-total">Total</Label>
-              <input
-                id="item-total"
-                type="text"
-                readOnly
-                value="400.00"
-                className={styles.total}
-              />
+              <input id="item-total" type="text" readOnly value="400.00" />
             </FormGroup>
 
             <div>

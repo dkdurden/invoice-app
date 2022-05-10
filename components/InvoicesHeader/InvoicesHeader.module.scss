@@ -63,7 +63,7 @@
   @include m.pop-up-menu;
   padding: 1rem;
   margin-top: 3.5rem;
-  background: white;
+  background: var(--filter-menu);
 
   // Fix issue where menu was under empty invoice svg
   z-index: 1;

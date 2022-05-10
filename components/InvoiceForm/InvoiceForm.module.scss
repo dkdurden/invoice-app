@@ -10,6 +10,7 @@
 
 .label {
   @include m.form-label(0);
+  color: var(--text3);
 }
 
 .errorMsg {

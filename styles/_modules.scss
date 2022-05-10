@@ -19,17 +19,19 @@
   &--light {
     @extend .button;
     background-color: v.$button-light-bg;
-    color: v.$button-light-color;
+    color: var(--text3);
+    background-color: var(--button-light);
 
     &:hover {
-      background-color: v.$gray-light;
+      background-color: var(--button-light-hover);
+      color: v.$button-light-color;
     }
   }
 
   &--dark {
     @extend .button;
     background-color: v.$lm-bg-dark-1;
-    color: v.$gray-dark;
+    color: var(--text1);
 
     &:hover {
       background-color: v.$lm-bg-dark-2;
@@ -68,6 +70,10 @@
     margin-top: 0.75rem;
   }
 
+  label {
+    color: var(--main-text);
+  }
+
   input[type="checkbox"] {
     position: absolute;
     margin: 0;
@@ -82,7 +88,7 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-color: v.$gray-light;
+    background-color: var(--checkbox-color);
     border-radius: 2px;
   }
 

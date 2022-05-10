@@ -21,7 +21,11 @@
 }
 
 .text-light {
-  color: v.$button-light-color;
+  color: var(--text3);
+}
+
+.text-white {
+  color: white;
 }
 
 .text-purple {
@@ -34,6 +38,10 @@
 
 .bg-light {
   background-color: white;
+}
+
+.text {
+  font-weight: 500;
 }
 
 .text-bold {

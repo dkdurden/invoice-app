@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "classnames";
 
 import { InvoiceContext } from "../../context/invoice-context";
 import styles from "./InvoiceDetails.module.scss";
@@ -44,8 +45,8 @@ export function InvoiceDetails() {
     <section className={`card ${styles.container}`}>
       <div className={styles.groupOne}>
         <header>
-          <h1 className={`h4 ${styles.heading}`}>
-            <span className="text text-light">#</span>
+          <h1 className={`h3 ${styles.heading}`}>
+            <span className="text-light">#</span>
             {invoiceData.id}
           </h1>
           <p className={`text-light ${styles.subheading}`}>Graphic Design</p>
@@ -99,8 +100,10 @@ export function InvoiceDetails() {
         <InvoicePriceBreakdown />
 
         <div className={`${styles.total} ${styles.row}`}>
-          <p className="alt">Grand Total</p>
-          <span className={styles.totalAmount}>&#163; {total}</span>
+          <p className="alt text-white">Grand Total</p>
+          <span className={cn(styles.totalAmount, "text-white")}>
+            &#163; {total}
+          </span>
         </div>
       </div>
     </section>

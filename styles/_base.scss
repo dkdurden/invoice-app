@@ -49,13 +49,17 @@ input[type="email"] {
 
   &:read-only {
     border: none;
-    padding-left: 0;
-    padding-right: 0;
     color: v.$gray-dark;
+    background: none;
 
     &:focus,
     &.focus {
       outline: none;
+    }
+
+    @media (min-width: 768px) {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 }
