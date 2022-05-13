@@ -1,18 +1,19 @@
 import Image from "next/image";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
 import cn from "classnames";
 
 import { toggle, menu, option, focus } from "./CustomSelect.module.scss";
 
-function Select({ children, value, onChange }) {
+function Select({ children, value, onChange, name }) {
+  const optionsRef = React.useRef(null);
+
+  const onFocus = () => {
+    if (optionsRef.current) optionsRef.current.scrollIntoView();
+  };
+
   return (
-    <Listbox
-      as="div"
-      className="custom-select"
-      value={value}
-      onChange={onChange}
-    >
+    <Listbox as="div" value={value} onChange={onChange} name={name}>
       <Listbox.Button as={Fragment}>
         {({ open }) => (
           <button className={cn(toggle, `${open ? focus : ""}`)}>
@@ -27,9 +28,7 @@ function Select({ children, value, onChange }) {
         )}
       </Listbox.Button>
 
-      <Listbox.Options
-        className={cn(menu, "animate__animated", "animate__bounceInLeft")}
-      >
+      <Listbox.Options ref={optionsRef} className={menu} onFocus={onFocus}>
         {children}
       </Listbox.Options>
     </Listbox>

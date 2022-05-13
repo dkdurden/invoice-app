@@ -104,7 +104,6 @@ export function useGrid(close) {
 
           return;
         default:
-          console.log(e.code);
           return;
       }
     };

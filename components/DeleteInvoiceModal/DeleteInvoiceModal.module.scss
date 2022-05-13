@@ -1,0 +1,43 @@
+@use "../../styles/variables" as v;
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translate(0, -50%);
+  //   width: calc(100% - 3rem);
+  width: 87.5%;
+  background: white;
+  z-index: 100;
+  padding: 4rem;
+  border-radius: 8px;
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397),
+    0 0 0 100vw rgba(black, 0.5);
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 480px;
+  background-color: var(--bg-card);
+
+  @media (min-width: v.$md) {
+    padding: 3rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.heading {
+  margin: 0;
+}
+
+.desc {
+  margin-bottom: 1rem;
+}
+
+.group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

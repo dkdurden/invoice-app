@@ -1,4 +1,5 @@
 @use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
 
 .container {
   display: flex;
@@ -16,21 +17,94 @@
     margin-bottom: 0.25rem;
   }
   span {
-    color: v.$gray-dark;
+    // color: v.$gray-dark;
+    color: var(--text1);
   }
 }
 
 .groupTwo {
   flex-basis: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-end;
 }
 
-.dropdown {
-  margin-right: 1.1rem;
+.popover {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-  span {
-    margin-left: 0.75rem;
+.dropdown {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  button {
+    height: 100%;
+  }
+
+  @media (min-width: v.$md) {
+    padding-left: 2rem;
+    padding-right: 2.3rem;
+  }
+}
+
+.text {
+  margin-right: 0.75rem;
+
+  @media (min-width: v.$md) {
+    &::after {
+      content: " by status";
+    }
+  }
+}
+
+.menu {
+  @include m.pop-up-menu;
+  padding: 1rem;
+  margin-top: 3.5rem;
+  background: var(--filter-menu);
+
+  // Fix issue where menu was under empty invoice svg
+  z-index: 1;
+
+  &:focus {
+    // Per design file
+    outline: 0;
+  }
+
+  @media (min-width: v.$md) {
+    width: 200px;
+    padding: 1.5rem;
+  }
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  + .filterGroup {
+    margin-top: 0.75rem;
+  }
+}
+
+.newInvoiceBtn {
+  .btnText {
+    display: inline-block;
+    padding-right: 0.5rem;
+
+    // overwrite css variable
+    color: white;
+
+    @media (min-width: v.$md) {
+      padding-right: 0;
+      max-width: 150px;
+
+      &::after {
+        content: " Invoice";
+        padding-right: 0.5rem;
+      }
+    }
   }
 }

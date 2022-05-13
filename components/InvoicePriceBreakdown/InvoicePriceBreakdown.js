@@ -1,9 +1,13 @@
-// import { useWindowSize } from "../../hooks/useWindowSize";
+import React from "react";
+
+import { InvoiceContext } from "../../context/invoice-context";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { processCurrency } from "../../utilities/processCurrency";
 import styles from "./InvoicePriceBreakdown.module.scss";
 
-export function InvoicePriceBreakdown({ invoiceData }) {
+export function InvoicePriceBreakdown() {
+  const invoiceData = React.useContext(InvoiceContext);
+
   const aboveBreakpoint = useMediaQuery(768);
 
   return (
@@ -22,12 +26,14 @@ export function InvoicePriceBreakdown({ invoiceData }) {
             {invoiceData.items.map((item) => {
               return (
                 <tr key={item.name}>
-                  <td className="h4">{item.name}</td>
+                  <td className="h4 text-light">{item.name}</td>
                   <td className="h4 text-light">{item.quantity}</td>
                   <td className="h4 text-light">
                     &#163; {processCurrency(item.price)}
                   </td>
-                  <td className="h4">&#163; {processCurrency(item.total)}</td>
+                  <td className="h4 text-light">
+                    &#163; {processCurrency(item.total)}
+                  </td>
                 </tr>
               );
             })}

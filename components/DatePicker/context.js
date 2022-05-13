@@ -1,10 +1,13 @@
 import React from "react";
 
+import { processDate } from "../../utilities/processDate";
+
 const DateContext = React.createContext();
 
-function DateProvider({ children }) {
+function DateProvider({ children, onDateChange, initialDate = new Date() }) {
   const initialState = {
-    date: new Date(),
+    date: initialDate,
+    dateString: processDate(initialDate),
   };
 
   function reducer(state, action) {
@@ -13,24 +16,36 @@ function DateProvider({ children }) {
         const currentDate = new Date(state.date);
         const currentMonth = currentDate.getMonth();
 
+        const date = new Date(currentDate.setMonth(currentMonth + 1));
+        const dateString = processDate(date);
+
         return {
-          date: new Date(currentDate.setMonth(currentMonth + 1)),
+          date,
+          dateString,
         };
       }
       case "decrement_month": {
         const currentDate = new Date(state.date);
         const currentMonth = currentDate.getMonth();
 
+        const date = new Date(currentDate.setMonth(currentMonth - 1));
+        const dateString = processDate(date);
+
         return {
-          date: new Date(currentDate.setMonth(currentMonth - 1)),
+          date,
+          dateString,
         };
       }
       case "set_date": {
         const { date } = action.payload;
         const currentDate = new Date(state.date);
 
+        const newDate = new Date(currentDate.setDate(date));
+        const dateString = processDate(newDate);
+
         return {
-          date: new Date(currentDate.setDate(date)),
+          date: newDate,
+          dateString,
         };
       }
 
@@ -41,6 +56,11 @@ function DateProvider({ children }) {
 
   const activeIndexRef = React.useRef(-1);
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  // Invoke callback when the date changes to update form state
+  React.useEffect(() => {
+    onDateChange(state.dateString);
+  }, [onDateChange, state.dateString]);
 
   const createDateArray = React.useCallback(() => {
     const dateArray = [];
@@ -84,6 +104,7 @@ function DateProvider({ children }) {
 
   const value = {
     date: state.date,
+    dateString: state.dateString,
     dispatch,
     createDateArray,
     activeIndexRef,

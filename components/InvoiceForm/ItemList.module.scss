@@ -1,0 +1,85 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.row_sm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.heading {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: -0.38px;
+  color: v.$gray-alt;
+}
+
+.subgroup {
+  display: flex;
+  gap: 1rem;
+
+  > :first-child {
+    flex-basis: 4rem;
+    flex-grow: 1;
+  }
+
+  > :nth-child(2),
+  :nth-child(3) {
+    flex-basis: 6.25rem;
+    flex-grow: 1;
+  }
+
+  > :last-child {
+    align-self: center;
+  }
+}
+
+.label {
+  @include m.form-label();
+}
+
+.row_lg {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  > :first-child {
+    flex-basis: 13.375rem;
+  }
+
+  > :nth-child(2),
+  :nth-child(4) {
+    flex-basis: 2.875rem;
+  }
+
+  > :nth-child(3) {
+    flex-basis: 6.25rem;
+  }
+
+  > :nth-child(4) {
+    flex-basis: 4.2rem;
+  }
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+}
+
+.add {
+  width: 100%;
+}
+
+input.qty {
+  padding: 0;
+  text-align: center;
+}
+
+.qty,
+.total {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}

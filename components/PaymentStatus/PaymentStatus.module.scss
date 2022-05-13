@@ -15,18 +15,27 @@
 }
 
 .pending {
-  color: v.$orange;
   background-color: rgba(v.$orange, 7.5%);
 }
 
+.pending span {
+  color: v.$orange;
+}
+
 .paid {
-  color: v.$green;
   background-color: rgba(v.$green, 7.5%);
 }
 
+.paid span {
+  color: v.$green;
+}
+
 .draft {
-  color: v.$lm-bg-dark-1;
-  background-color: rgba(v.$lm-bg-dark-1, 7.5%);
+  background-color: rgba(var(--draft-color), 7.5%);
+}
+
+.draft span {
+  color: rgb(var(--draft-color));
 }
 
 .circle {
@@ -44,6 +53,6 @@
   }
 
   .draft & {
-    background-color: v.$lm-bg-dark-1;
+    background-color: rgb(var(--draft-color));
   }
 }

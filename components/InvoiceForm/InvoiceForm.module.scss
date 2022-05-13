@@ -1,0 +1,79 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.labelGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+}
+
+.label {
+  @include m.form-label(0);
+  color: var(--text3);
+}
+
+.errorMsg {
+  font-size: 0.625rem;
+  line-height: 15px;
+  letter-spacing: -0.21px;
+  color: v.$danger;
+}
+
+.errorList {
+  margin-top: 2rem;
+
+  & .errorMsg {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+}
+
+.input.invalid::after {
+  content: "can't be empty";
+  position: absolute;
+  display: block;
+
+  @extend .errorMsg;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem 1.5rem;
+  grid-template-columns: 1fr 1fr;
+
+  &__lg {
+    @extend .grid;
+
+    > * {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: v.$md) {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &__lg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+.wide {
+  grid-column: 1 / 3;
+
+  @media (min-width: v.$md) {
+    grid-column: 1 / 4;
+
+    .grid__lg & {
+      grid-column: 1 / 5;
+    }
+  }
+}
+
+.group {
+  > * {
+    width: 100%;
+  }
+}

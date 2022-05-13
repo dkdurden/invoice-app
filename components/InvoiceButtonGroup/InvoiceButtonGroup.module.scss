@@ -3,5 +3,6 @@
 .container {
   @include m.button-group(0.6rem, 2vw, 0.75rem);
 
-  background-color: white;
+  // dark mode support
+  background-color: var(--bg-card);
 }

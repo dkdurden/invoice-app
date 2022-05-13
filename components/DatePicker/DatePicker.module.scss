@@ -2,12 +2,24 @@
 @use "../../styles/mixins" as m;
 
 .container {
-  max-width: 240px;
+  // max-width: 240px;
+}
+
+.popupContainer {
+  position: absolute;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 10px 20px 0px var(--pop-up-menu-shadow);
+  margin-top: 1rem;
 }
 
 .popupBox {
-  height: 243px;
-  padding: 2.5rem 1.1875rem 2rem;
+  // height: 243px;
+  padding: 1.5rem 1.1875rem 2rem;
+  // margin-bottom: 2rem;
+  background-color: var(--bg-card);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .input {
@@ -39,6 +51,7 @@
 
 .day {
   text-align: center;
+  color: var(--main-text);
 
   &.active,
   &:focus {
