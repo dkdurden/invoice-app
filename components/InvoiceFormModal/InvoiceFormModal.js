@@ -1,4 +1,5 @@
 import Image from "next/image";
+import React from "react";
 import "simplebar";
 
 import { useModalState } from "../../context/app-context";
@@ -8,6 +9,8 @@ import styles from "./InvoiceFormModal.module.scss";
 
 export function InvoiceFormModal() {
   const { formAction, toggleModal, invoiceData } = useModalState();
+
+  const formRef = React.useRef();
 
   const onClick = (e) => {
     toggleModal();
@@ -31,12 +34,12 @@ export function InvoiceFormModal() {
             <h1 className={styles.heading}>New Invoice</h1>
           )}
 
-          <InvoiceForm />
+          <InvoiceForm formRef={formRef} />
         </div>
       </div>
 
       <div className={styles.buttonGroup}>
-        <FormButtonGroup formAction={formAction} />
+        <FormButtonGroup formAction={formAction} formRef={formRef} />
       </div>
     </div>
   );

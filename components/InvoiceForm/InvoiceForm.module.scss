@@ -19,6 +19,16 @@
   color: v.$danger;
 }
 
+.errorList {
+  margin-top: 2rem;
+
+  & .errorMsg {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+}
+
 .input.invalid::after {
   content: "can't be empty";
   position: absolute;

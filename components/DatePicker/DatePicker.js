@@ -7,9 +7,9 @@ import { Input } from "./Input";
 import { PopupBox } from "./PopupBox";
 import styles from "./DatePicker.module.scss";
 
-export function DatePicker({ onDateChange, ...props }) {
+export function DatePicker({ onDateChange, initialDate, ...props }) {
   return (
-    <DateProvider onDateChange={onDateChange}>
+    <DateProvider onDateChange={onDateChange} initialDate={initialDate}>
       <Popover className={styles.container}>
         <Popover.Button as={Fragment}>
           {({ open }) => (

@@ -21,6 +21,7 @@ export function useInvoices() {
     invoices: context.invoices,
     removeInvoice: context.removeInvoice,
     addInvoice: context.addInvoice,
+    updateInvoice: context.updateInvoice,
   };
 }
 
@@ -49,6 +50,13 @@ export function StateProvider({ children, initialInvoices }) {
     setInvoices((prevState) => [...prevState, invoiceData]);
   };
 
+  const updateInvoice = (invoiceData) =>
+    setInvoices((prevState) =>
+      prevState.map((invoice) =>
+        invoice.id === invoiceData.id ? invoiceData : invoice
+      )
+    );
+
   const toggleModal = (formAction, invoiceData) => {
     setModalState((prevState) => {
       if (prevState.open) {
@@ -72,6 +80,7 @@ export function StateProvider({ children, initialInvoices }) {
     invoices,
     removeInvoice,
     addInvoice,
+    updateInvoice,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

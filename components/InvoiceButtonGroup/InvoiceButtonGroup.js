@@ -2,11 +2,13 @@ import React from "react";
 
 import { ModalContext } from "../DeleteInvoiceModal/ModalContext";
 import { InvoiceContext } from "../../context/invoice-context";
-import { useModalState } from "../../context/app-context";
+import { useInvoices, useModalState } from "../../context/app-context";
 import styles from "./InvoiceButtonGroup.module.scss";
 
 export function InvoiceButtonGroup() {
   const invoiceData = React.useContext(InvoiceContext);
+
+  const { updateInvoice } = useInvoices();
 
   // Form modal
   const { toggleModal } = useModalState();
@@ -15,6 +17,8 @@ export function InvoiceButtonGroup() {
   // delete invoice modal
   const { toggleModal: toggleDeleteInvoiceModal } =
     React.useContext(ModalContext);
+
+  const markAsPaid = () => updateInvoice({ ...invoiceData, status: "paid" });
 
   return (
     <div className={styles.container}>
@@ -27,7 +31,9 @@ export function InvoiceButtonGroup() {
       >
         Delete
       </button>
-      <button className="button--primary">Mark as Paid</button>
+      <button className="button--primary" onClick={markAsPaid}>
+        Mark as Paid
+      </button>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import { toggle, menu, option, focus } from "./CustomSelect.module.scss";
 
-function Select({ children, value, onChange }) {
+function Select({ children, value, onChange, name }) {
   const optionsRef = React.useRef(null);
 
   const onFocus = () => {
@@ -13,7 +13,7 @@ function Select({ children, value, onChange }) {
   };
 
   return (
-    <Listbox as="div" value={value} onChange={onChange}>
+    <Listbox as="div" value={value} onChange={onChange} name={name}>
       <Listbox.Button as={Fragment}>
         {({ open }) => (
           <button className={cn(toggle, `${open ? focus : ""}`)}>

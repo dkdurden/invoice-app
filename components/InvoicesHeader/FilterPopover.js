@@ -4,7 +4,16 @@ import { Popover } from "@headlessui/react";
 
 import styles from "./InvoicesHeader.module.scss";
 
-export function FilterPopover() {
+export function FilterPopover({ setFilter }) {
+  const toggleFilter = (e) => {
+    setFilter((prevState) => {
+      if (prevState.includes(e.target.name)) {
+        return prevState.filter((value) => value !== e.target.name);
+      }
+
+      return [...prevState, e.target.name];
+    });
+  };
   return (
     <Popover as={React.Fragment}>
       {({ open }) => (
@@ -31,19 +40,34 @@ export function FilterPopover() {
 
           <Popover.Panel className={styles.menu}>
             <div className="checkbox">
-              <input type="checkbox" id="draft-filter" />
+              <input
+                type="checkbox"
+                id="draft-filter"
+                name="draft"
+                onChange={toggleFilter}
+              />
               <label htmlFor="draft-filter" className="h4">
                 Draft
               </label>
             </div>
             <div className="checkbox">
-              <input type="checkbox" id="pending-filter" />
+              <input
+                type="checkbox"
+                id="pending-filter"
+                name="pending"
+                onChange={toggleFilter}
+              />
               <label htmlFor="pending-filter" className="h4">
                 Pending
               </label>
             </div>
             <div className="checkbox">
-              <input type="checkbox" id="paid-filter" />
+              <input
+                type="checkbox"
+                id="paid-filter"
+                name="paid"
+                onChange={toggleFilter}
+              />
               <label htmlFor="paid-filter" className="h4">
                 Paid
               </label>

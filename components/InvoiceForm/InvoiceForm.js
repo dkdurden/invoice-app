@@ -1,6 +1,7 @@
+import Router from "next/router";
 import React from "react";
 import cn from "classnames";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
 
 import { FormGroup } from "./FormGroup";
 import { Label } from "./Label";
@@ -9,12 +10,13 @@ import styles from "./InvoiceForm.module.scss";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { PaymentTermsSelect } from "../PaymentTermsSelect/PaymentTermsSelect";
 import { ItemList } from "./ItemList";
-import { useInvoices } from "../../context/app-context";
+import { useInvoices, useModalState } from "../../context/app-context";
 import { Input } from "./Input";
 
+const nanoid = customAlphabet("123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6);
+
 const initialState = {
-  // id: "",
-  paymentDue: "",
+  paymentTerms: 30,
   description: "",
   clientName: "",
   clientEmail: "",
@@ -31,7 +33,6 @@ const initialState = {
     country: "",
   },
   items: [],
-  // total: "",
 };
 
 function validateStateObj(state) {
@@ -80,8 +81,6 @@ function validateForm(state) {
 
   const errors = validateStateObj(state);
 
-  console.log(errors);
-
   if (errors != null) {
     errorMessages.push("All items must not be empty");
   }
@@ -89,16 +88,18 @@ function validateForm(state) {
   return [errorMessages.length > 0, errorMessages, errors];
 }
 
-export function InvoiceForm() {
-  const { addInvoice } = useInvoices();
+export function InvoiceForm({ formRef }) {
+  const { addInvoice, updateInvoice } = useInvoices();
+  const { toggleModal, invoiceData, formAction } = useModalState();
   const aboveBreakpoint = useMediaQuery(768);
 
-  const [state, setState] = React.useState(initialState);
+  const [state, setState] = React.useState(invoiceData || initialState);
   const [errors, setErrors] = React.useState(null);
   const [errorList, setErrorList] = React.useState([]);
 
   const handleValueChange = (e) => {
     const { name } = e.target;
+
     setState((prevState) => ({ ...prevState, [name]: e.target.value }));
 
     // Clear errors
@@ -107,8 +108,14 @@ export function InvoiceForm() {
     }
   };
 
+  const updatePaymentTerms = (value) =>
+    setState((prevState) => ({
+      ...prevState,
+      paymentTerms: value,
+    }));
+
   const handleDateChange = React.useCallback((newDate) => {
-    setState((prevState) => ({ ...prevState, paymentDue: newDate }));
+    setState((prevState) => ({ ...prevState, createdAt: newDate }));
   }, []);
 
   const handleAddressChange = (e) => {
@@ -159,6 +166,16 @@ export function InvoiceForm() {
     const index = parseInt(e.target.dataset.index);
     const { name, value } = e.target;
 
+    const calculateTotal = (price, quantity) => {
+      if (!price || !quantity) {
+        return 0;
+      }
+
+      const total = parseFloat(price) * parseInt(quantity);
+
+      return isNaN(total) ? 0 : total;
+    };
+
     if (index != null)
       setState((prevState) => ({
         ...prevState,
@@ -168,8 +185,16 @@ export function InvoiceForm() {
             return item;
           }
 
+          let total;
+
+          if (name === "price") total = calculateTotal(value, item.quantity);
+          else if (name === "quantity")
+            total = calculateTotal(item.price, value);
+          else total = item.total;
+
           return {
             ...item,
+            total,
             [name]: value,
           };
         }),
@@ -235,22 +260,108 @@ export function InvoiceForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // alert("Submitted!");
 
-    const [hasErrors, errorMessages, errors] = validateForm(state);
+    const calculatePaymentDue = (createdAt, paymentTerms) => {
+      const paymentDue = new Date(createdAt);
+      paymentDue.setDate(paymentDue.getDate() + parseInt(paymentTerms));
 
-    if (hasErrors) {
-      setErrors(errors);
-      setErrorList(errorMessages);
-      console.log(errors, errorMessages);
+      return `${paymentDue.getFullYear()}-${
+        paymentDue.getMonth() + 1
+      }-${paymentDue.getDate()}`;
+    };
+
+    if (formAction === "edit-invoice") {
+      const [hasErrors, errorMessages, errors] = validateForm(state);
+
+      if (hasErrors) {
+        setErrors(errors);
+        setErrorList(errorMessages);
+      } else {
+        // Invoice total
+        const total = state.items.reduce((acc, curr) => {
+          acc += parseInt(curr.quantity) * parseFloat(curr.price);
+          return acc;
+        }, 0);
+
+        // payment due date
+        const paymentDue = calculatePaymentDue(
+          state.createdAt,
+          state.paymentTerms
+        );
+
+        const invoiceWithID = {
+          ...state,
+          total,
+          paymentDue,
+        };
+        updateInvoice(invoiceWithID);
+        Router.push("/");
+        toggleModal();
+      }
     } else {
-      const invoiceWithID = { id: nanoid(6), total: 400, ...state };
-      addInvoice(invoiceWithID);
+      // Save as draft
+      if (e.target.draft.value === "true") {
+        // Invoice total
+        const total = state.items.reduce((acc, curr) => {
+          acc += parseInt(curr.quantity) * parseFloat(curr.price);
+          return acc;
+        }, 0);
+
+        // payment due date
+        const paymentDue = calculatePaymentDue(
+          state.createdAt,
+          state.paymentTerms
+        );
+
+        const invoiceWithID = {
+          ...state,
+          id: nanoid(6),
+          status: "draft",
+          total,
+          paymentDue,
+        };
+
+        addInvoice(invoiceWithID);
+        toggleModal();
+        return;
+      }
+
+      const [hasErrors, errorMessages, errors] = validateForm(state);
+
+      if (hasErrors) {
+        setErrors(errors);
+        setErrorList(errorMessages);
+      } else {
+        // Invoice total
+        const total = state.items.reduce((acc, curr) => {
+          acc += parseInt(curr.quantity) * parseFloat(curr.price);
+          return acc;
+        }, 0);
+
+        // payment due date
+        const paymentDue = calculatePaymentDue(
+          state.createdAt,
+          state.paymentTerms
+        );
+
+        const invoiceWithID = {
+          ...state,
+          id: nanoid(6),
+          total,
+          paymentDue,
+          status: "pending",
+        };
+
+        addInvoice(invoiceWithID);
+
+        toggleModal();
+      }
     }
   };
 
   return (
-    <form id="invoice-form" onSubmit={onSubmit}>
+    <form id="invoice-form" onSubmit={onSubmit} ref={formRef} method="POST">
+      <input type="hidden" name="draft" value="" />
       <p id="bill-from" className="h4 text-purple mb-3">
         Bill From
       </p>
@@ -433,6 +544,7 @@ export function InvoiceForm() {
           <DatePicker
             aria-describedby="invoice-date"
             onDateChange={handleDateChange}
+            initialDate={state.createdAt}
           />
         </FormGroup>
 
@@ -440,7 +552,11 @@ export function InvoiceForm() {
           <Label id="payment-terms" as={"p"}>
             Payment Terms
           </Label>
-          <PaymentTermsSelect />
+          <PaymentTermsSelect
+            paymentTermsState={state.paymentTerms}
+            name="paymentTerms"
+            updatePaymentTerms={updatePaymentTerms}
+          />
         </FormGroup>
 
         <FormGroup className={styles.wide}>
@@ -473,6 +589,16 @@ export function InvoiceForm() {
         createHandleBlur={createHandleBlur}
         errors={errors}
       />
+
+      {errorList.length > 0 && (
+        <div className={styles.errorList}>
+          {errorList.map((error, index) => (
+            <p key={index} className={styles.errorMsg}>
+              - {error}
+            </p>
+          ))}
+        </div>
+      )}
     </form>
   );
 }

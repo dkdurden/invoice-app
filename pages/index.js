@@ -19,15 +19,26 @@ import { useInvoices } from "../context/app-context";
 export default function Home() {
   const { invoices } = useInvoices();
 
+  const [filters, setFilter] = React.useState([]);
+
   const showInvoices = invoices && invoices.length > 0;
+
+  const filteredInvoices =
+    filters.length > 0
+      ? invoices.filter((invoice) => filters.join().includes(invoice.status))
+      : invoices;
 
   return (
     <Layout>
       <div className="container">
-        <InvoicesHeader />
+        <InvoicesHeader setFilter={setFilter} />
 
         <div className="content">
-          {showInvoices ? <Invoices invoices={invoices} /> : <EmptyInvoices />}
+          {showInvoices ? (
+            <Invoices invoices={filteredInvoices} />
+          ) : (
+            <EmptyInvoices />
+          )}
         </div>
       </div>
     </Layout>

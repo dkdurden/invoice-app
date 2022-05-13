@@ -7,6 +7,7 @@ import { FormGroup } from "./FormGroup";
 import { Label } from "./Label";
 import styles from "./ItemList.module.scss";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { processCurrency } from "../../utilities/processCurrency";
 
 export function ItemList({
   items,
@@ -82,6 +83,7 @@ function ItemsLG({
               type="text"
               name="name"
               onChange={handleItemChange}
+              value={item.name}
               index={index}
               error={errors?.items?.[index]?.name}
             />
@@ -93,6 +95,7 @@ function ItemsLG({
               type="text"
               name="quantity"
               onChange={handleItemChange}
+              value={item.quantity}
               onBlur={createHandleBlur(null, index)}
               index={index}
               className={styles.qty}
@@ -109,6 +112,7 @@ function ItemsLG({
               onChange={handleItemChange}
               index={index}
               error={errors?.items?.[index]?.price}
+              value={item.price}
             />
           </FormGroup>
 
@@ -117,7 +121,7 @@ function ItemsLG({
               aria-labelledby="item-total"
               type="text"
               readOnly
-              value="400.00"
+              value={item.total ? processCurrency(item.total) : "0"}
               className={styles.total}
             />
           </FormGroup>
@@ -145,6 +149,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
               id="item-name"
               type="text"
               onChange={handleItemChange}
+              value={item.name}
               index={index}
               error={errors?.items?.[index].name}
             />
@@ -157,6 +162,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
                 id="item-quantity"
                 type="text"
                 onChange={handleItemChange}
+                value={item.quantity}
                 index={index}
                 error={errors?.items?.[index].quantity}
                 showError={false}
@@ -169,6 +175,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
                 id="item-price"
                 type="text"
                 onChange={handleItemChange}
+                value={item.price}
                 index={index}
                 error={errors?.items?.[index].price}
                 showError={false}
@@ -181,7 +188,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
                 id="item-total"
                 type="text"
                 readOnly
-                value="400.00"
+                value={item.total || "0"}
                 className={styles.total}
               />
             </FormGroup>

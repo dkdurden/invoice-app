@@ -3,7 +3,7 @@ import { ButtonWithAdd } from "../ButtonWithAdd/ButtonWithAdd";
 import { FilterPopover } from "./FilterPopover";
 import styles from "./InvoicesHeader.module.scss";
 
-export function InvoicesHeader() {
+export function InvoicesHeader({ setFilter }) {
   const { toggleModal } = useModalState();
 
   const onClick = () => {
@@ -19,7 +19,7 @@ export function InvoicesHeader() {
         </div>
 
         <div className={styles.groupTwo}>
-          <FilterPopover />
+          <FilterPopover setFilter={setFilter} />
           <div className={styles.newInvoiceBtn}>
             <ButtonWithAdd onClick={onClick}>
               <span className={styles.btnText}>New</span>
