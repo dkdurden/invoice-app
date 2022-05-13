@@ -8,6 +8,7 @@ export function Input({
   name,
   ariaLabelledBy,
   placeholder,
+  className,
   value,
   onChange,
   onBlur,
@@ -15,6 +16,8 @@ export function Input({
   showError = true,
   index,
 }) {
+  const newClassName = cn(className, error && "invalid");
+
   return (
     <div className={cn(styles.input, error && showError && styles.invalid)}>
       <input
@@ -26,7 +29,7 @@ export function Input({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className={cn("test", error && "invalid")}
+        className={newClassName}
         style={{ width: "100%" }}
         data-index={index}
       />

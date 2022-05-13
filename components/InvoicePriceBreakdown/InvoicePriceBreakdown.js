@@ -26,12 +26,14 @@ export function InvoicePriceBreakdown() {
             {invoiceData.items.map((item) => {
               return (
                 <tr key={item.name}>
-                  <td className="h4">{item.name}</td>
+                  <td className="h4 text-light">{item.name}</td>
                   <td className="h4 text-light">{item.quantity}</td>
                   <td className="h4 text-light">
                     &#163; {processCurrency(item.price)}
                   </td>
-                  <td className="h4">&#163; {processCurrency(item.total)}</td>
+                  <td className="h4 text-light">
+                    &#163; {processCurrency(item.total)}
+                  </td>
                 </tr>
               );
             })}

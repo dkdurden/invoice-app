@@ -19,7 +19,9 @@ export function FilterPopover({ setFilter }) {
       {({ open }) => (
         <div
           className={styles.popover}
-          style={{ borderLeft: open ? "1px solid black" : null }}
+          style={{
+            borderLeft: open ? "1px solid var(--main-text)" : null,
+          }}
         >
           <Popover.Button as={"div"} className={styles.dropdown}>
             {({ open }) => (

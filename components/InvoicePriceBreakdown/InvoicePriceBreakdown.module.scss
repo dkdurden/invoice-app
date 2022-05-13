@@ -1,7 +1,7 @@
 @use "../../styles/variables" as v;
 
 .container {
-  background-color: v.$button-light-bg;
+  background-color: var(--button-light);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 

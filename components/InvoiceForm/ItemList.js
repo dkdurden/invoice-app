@@ -189,7 +189,6 @@ function ItemsSM({ items, handleItemChange, errors }) {
                 type="text"
                 readOnly
                 value={item.total || "0"}
-                className={styles.total}
               />
             </FormGroup>
 

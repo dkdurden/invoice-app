@@ -5,6 +5,7 @@
   @include m.button-group(0.49rem, 2.3vw, 0.75rem);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  background-color: var(--main-bg);
 
   @media (min-width: v.$md) {
     padding-left: 3.5rem;

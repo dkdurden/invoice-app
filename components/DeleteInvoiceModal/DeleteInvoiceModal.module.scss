@@ -17,6 +17,7 @@
   margin: 0 auto;
   padding: 2rem;
   max-width: 480px;
+  background-color: var(--bg-card);
 
   @media (min-width: v.$md) {
     padding: 3rem;

@@ -24,7 +24,7 @@ export function Invoice({ invoice }) {
           <span className={`${styles.total} h3`}>&#163; {total}</span>
 
           <div className={`${styles.name} d-flex align-end`}>
-            <span className="text text-dark">{invoice.clientName}</span>
+            <span className="text text-dark-alt">{invoice.clientName}</span>
           </div>
 
           <div className={`${styles.status} d-flex align-end`}>

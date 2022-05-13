@@ -3,3 +3,56 @@
 @use "./layout";
 @use "./utility";
 @use "./simplebar";
+@use "./variables" as v;
+
+// CSS variables for light/dark mode
+// Put here because next server doesn't like them in _variables.scss
+:root {
+  --main-bg: #{v.$lm-main-bg};
+  --dark-bg: #{v.$lm-bg-dark-1};
+  --bg-card: white;
+  --main-text: black;
+  --text1: #{v.$gray-dark};
+  --text2: #858bb2;
+  --text3: #{v.$button-light-color};
+  --draft-color: #{v.$lm-bg-dark-1-rgb};
+  --button-light: #{v.$button-light-bg};
+  --button-light-hover: #{v.$gray-light};
+  --filter-menu: white;
+  --checkbox-color: #{v.$gray-light};
+  --pop-up-menu-shadow: #48549f40;
+  --form-control-border: #{v.$gray-light};
+}
+
+body.dark {
+  --main-bg: #{v.$dm-main-bg};
+  --dark-bg: black;
+  --bg-card: #{v.$dm-bg-dark-1};
+  --main-text: white;
+  --text1: #{v.$gray-light};
+  --text2: white;
+  --text3: #{v.$gray-light};
+  --draft-color: #{v.$gray-light-rgb};
+  --button-light: #{v.$bg-dark-2};
+  --button-light-hover: white;
+  --filter-menu: #{v.$bg-dark-2};
+  --checkbox-color: #{v.$dm-bg-dark-1};
+  --pop-up-menu-shadow: rgba(0, 0, 0, 0.25);
+  --form-control-border: #{v.$bg-dark-2};
+}
+
+body {
+  background-color: var(--main-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+  // dark mode support
+  color: var(--main-text);
+}
