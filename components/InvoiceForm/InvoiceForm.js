@@ -12,6 +12,7 @@ import { PaymentTermsSelect } from "../PaymentTermsSelect/PaymentTermsSelect";
 import { ItemList } from "./ItemList";
 import { useInvoices, useModalState } from "../../context/app-context";
 import { Input } from "./Input";
+import { getValidDate } from "../../utilities/getValidDate";
 
 const nanoid = customAlphabet("123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 6);
 
@@ -262,7 +263,9 @@ export function InvoiceForm({ formRef }) {
     e.preventDefault();
 
     const calculatePaymentDue = (createdAt, paymentTerms) => {
-      const paymentDue = new Date(createdAt);
+      const validDate = getValidDate(createdAt);
+      const paymentDue = new Date(...validDate);
+
       paymentDue.setDate(paymentDue.getDate() + parseInt(paymentTerms));
 
       return `${paymentDue.getFullYear()}-${

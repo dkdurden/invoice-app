@@ -11,6 +11,7 @@ body {
   margin: 0;
   font-family: v.$font-family;
   background-color: v.$lm-main-bg;
+  min-height: 100vh;
 
   @media (min-width: v.$md) {
     overflow: hidden;

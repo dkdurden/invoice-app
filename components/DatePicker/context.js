@@ -59,8 +59,8 @@ function DateProvider({ children, onDateChange, initialDate = new Date() }) {
 
   // Invoke callback when the date changes to update form state
   React.useEffect(() => {
-    onDateChange(state.dateString);
-  }, [onDateChange, state.dateString]);
+    onDateChange(state.date);
+  }, [onDateChange, state.date]);
 
   const createDateArray = React.useCallback(() => {
     const dateArray = [];

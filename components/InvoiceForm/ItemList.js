@@ -148,6 +148,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
             <Input
               id="item-name"
               type="text"
+              name="name"
               onChange={handleItemChange}
               value={item.name}
               index={index}
@@ -161,6 +162,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
               <Input
                 id="item-quantity"
                 type="text"
+                name="quantity"
                 onChange={handleItemChange}
                 value={item.quantity}
                 index={index}
@@ -174,6 +176,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
               <Input
                 id="item-price"
                 type="text"
+                name="price"
                 onChange={handleItemChange}
                 value={item.price}
                 index={index}
@@ -188,7 +191,7 @@ function ItemsSM({ items, handleItemChange, errors }) {
                 id="item-total"
                 type="text"
                 readOnly
-                value={item.total || "0"}
+                value={item.total ? processCurrency(item.total) : "0"}
               />
             </FormGroup>
 

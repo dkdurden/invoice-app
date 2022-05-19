@@ -30,6 +30,7 @@ export function DayBox({ day, index, close }) {
       disabled={day.disabled}
       data-date={day.date}
       onClick={handleClick}
+      onTouchStart={handleClick}
     >
       {day.day}
     </button>

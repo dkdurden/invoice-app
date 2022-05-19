@@ -5,6 +5,7 @@ import { InvoiceContext } from "../../context/invoice-context";
 import styles from "./InvoiceDetails.module.scss";
 import { processCurrency } from "../../utilities/processCurrency";
 import { InvoicePriceBreakdown } from "../InvoicePriceBreakdown/InvoicePriceBreakdown";
+import { getValidDate } from "../../utilities/getValidDate";
 
 export function InvoiceDetails() {
   const invoiceData = React.useContext(InvoiceContext);
@@ -27,7 +28,10 @@ export function InvoiceDetails() {
   };
 
   const createdAtDateObject = new Date(invoiceData.createdAt);
-  const paymentDueDateObject = new Date(invoiceData.paymentDue);
+
+  // paymentDue dates can have formats that Safari doesn't like...
+  const validPaymentDueDate = getValidDate(invoiceData.paymentDue);
+  const paymentDueDateObject = new Date(...validPaymentDueDate);
 
   const createdAt = {
     day: createdAtDateObject.getDate(),
