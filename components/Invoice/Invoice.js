@@ -9,6 +9,7 @@ import styles from "./Invoice.module.scss";
 export function Invoice({ invoice }) {
   const date = processDate(invoice.paymentDue);
   const total = processCurrency(invoice.total);
+
   return (
     <article className={`${styles.invoice} card`}>
       <Link href={`/invoices/${invoice.id}`}>
